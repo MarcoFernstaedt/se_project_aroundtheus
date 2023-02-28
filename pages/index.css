@@ -59,7 +59,7 @@
     margin: 0;
 }
 
-profile__description {
+.profile__description {
     font-size: 19px;
     height: 18px;
     width: 500px;
@@ -79,15 +79,16 @@ profile__description {
 .gallery {
     display: flex;
     justify-content: center;
-    margin-top: 55px;
+    margin: 55px 20px 145px;
 }
 
 .gallery__cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, 282px);
-    grid-template-rows: repeat(auto-fit, 361px);
+    justify-content: center;
+    /* grid-template-rows: repeat(auto-fit, 361px); */
     gap: 17px;
-    margin: 0 20px ;
+    margin: 0;
     padding: 0;
 }
 
@@ -133,14 +134,29 @@ profile__description {
     height: 18px;
 }
 
-@media screen and (max-width: 320px) {
-    .page {
-        display: flex;
-        flex-direction: column;
-    }
-
+@media screen and (max-width: 480px) {
     .profile {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+    }
+
+    .profile__info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin-left: 62px;
+        margin-right: 62px;
+    }
+
+    .profile__description {
+        width: 100%;
+        text-align: center;
+    }
+
+    .profile__add-button {
+        margin: 0;
+        width: 100%;
     }
 }
