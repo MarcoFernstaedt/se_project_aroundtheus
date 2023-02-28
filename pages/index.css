@@ -36,6 +36,17 @@
     grid-template-columns: minmax(auto, 373px) auto;
 }
 
+.profile__button_dim {
+    opacity: 1;
+    transition: opacity 1s ease-in 3s linear;
+    border: none;
+}
+
+.profile__button_dim:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
 .profile__edit-button {
     background: transparent url("../vendor/editBtn.svg") center no-repeat;
     height: 24px;
@@ -139,6 +150,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .profile__image {
+        margin: 0;
     }
 
     .profile__info {
