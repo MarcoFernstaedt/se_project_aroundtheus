@@ -1,110 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="author" content="Marco Fernstaedt" />
-    <meta
-      name="description"
-      content="A site that displays photos from around the U.S. in a responsive gallary"
-    />
-    <meta name="keywords" content="travel nature explorer" />
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Around the US" />
+    <meta name="author" content="Marco Fernstaedt" />
+    <meta name="keywords" content="us, parks, nationalparks" />
     <title>Around the U.S</title>
     <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   </head>
   <body class="page">
     <div class="page__content">
-      <header class="header page__section">
-        <img src="./vendor/logo.svg" alt="arout the U.S. logo" />
+      <header class="header">
+        <img
+          class="header__image"
+          src="./images/logo.svg"
+          alt="Around the U.S. Logo"
+        />
       </header>
       <main class="content">
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.png"
-            alt="profile image"
             class="profile__image"
+            src="./images/jacques-cousteau.jpg"
+            alt="Avatar"
           />
           <div class="profile__info">
-            <h1 class="profile__title">jacques cousteau</h1>
-            <button class="profile__edit-button profile__button_dim"></button>
+            <h1 class="profile__title">Jacques Cousteau</h1>
+            <button class="profile__edit-button" type="button"></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button profile__button_dim"></button>
+          <button class="profile__add-button" type="button"></button>
         </section>
-        <section class="gallery">
-          <ul class="gallery__cards page__section">
+        <section class="cards page__section">
+          <ul class="cards__list">
             <li class="card">
               <img
                 src="./images/yosemite.jpg"
-                alt="picture of Yosemite Valley"
+                alt="Yosemite Valley"
                 class="card__image"
               />
-              <div class="card__header">
-                <h3 class="card__title">Yosemite Valley</h3>
-                <button class="card__heart-icon profile__button_dim"></button>
-              </div>
+              <h3 class="card__title">Yosemite Valley</h3>
+              <button class="card__like-button"></button>
             </li>
             <li class="card">
               <img
                 src="./images/lake-louise.jpg"
-                alt="picture of lake louise"
+                alt="Lake Louise"
                 class="card__image"
               />
-              <div class="card__header">
-                <h3 class="card__title">Lake Louise</h3>
-                <button class="card__heart-icon profile__button_dim"></button>
-              </div>
+              <h3 class="card__title">Lake Louise</h3>
+              <button class="card__like-button"></button>
             </li>
             <li class="card">
               <img
                 src="./images/bald-mountains.jpg"
-                alt="picture of the bald mountains"
+                alt="Bald Mountains"
                 class="card__image"
               />
-              <div class="card__header">
-                <h3 class="card__title">Bald Mountains</h3>
-                <button class="card__heart-icon profile__button_dim"></button>
-              </div>
+              <h3 class="card__title">Bald Mountains</h3>
+              <button class="card__like-button"></button>
             </li>
             <li class="card">
               <img
                 src="./images/latemar.jpg"
-                alt="picture of latemar"
+                alt="Latema"
                 class="card__image"
               />
-              <div class="card__header">
-                <h3 class="card__title">Latemar</h3>
-                <button class="card__heart-icon profile__button_dim"></button>
-              </div>
+              <h3 class="card__title">Latema</h3>
+              <button class="card__like-button"></button>
             </li>
             <li class="card">
               <img
                 src="./images/vanoise.jpg"
-                alt="picture of vanoise natinal park"
+                alt="Vanoise Natinal Park"
                 class="card__image"
               />
-              <div class="card__header">
-                <h3 class="card__title">Vanoise Natinal Park</h3>
-                <button class="card__heart-icon profile__button_dim"></button>
-              </div>
+              <h3 class="card__title">Vanoise Natinal Park</h3>
+              <button class="card__like-button"></button>
             </li>
             <li class="card">
               <img
                 src="./images/lago.jpg"
-                alt="picture of lago di braies"
+                alt="Lago di braies"
                 class="card__image"
               />
-              <div class="card__header">
-                <h3 class="card__title">Lago di braies</h3>
-                <button class="card__heart-icon profile__button_dim"></button>
-              </div>
+              <h3 class="card__title">Lago di braies</h3>
+              <button class="card__like-button"></button>
             </li>
           </ul>
         </section>
       </main>
       <footer class="footer page__section">
-        <p class="footer__copyright">&copy 2023 Around the U.S.</p>
+        <p class="footer__copyright">&copy 2022 Around The U.S.</p>
       </footer>
     </div>
   </body>
