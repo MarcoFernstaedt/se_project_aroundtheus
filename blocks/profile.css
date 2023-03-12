@@ -93,12 +93,13 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		max-width: 282px;
-		padding-left: 10px;
+		border: 1px solid #fff;
 	}
 
 	.profile__edit-button {
 		height: 18px;
 		width: 18px;
+		margin-top: 15px;
 	}
 
 	.profile__description {
@@ -118,12 +119,12 @@
 	}
 }
 
-@media screen and (min-width: 760px) and (max-width: 1100px) {
+@media screen and (max-width: 920px) {
 	.profile__edit-button {
-		background-size: 7px;
+		background-size: 7px 7px;
 	}
 
 	.profile__add-button {
-		background-size: 16px;
+		background-size: 16px 16px;
 	}
 }
