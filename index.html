@@ -108,8 +108,16 @@
         <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
-      
+    <div class="modal modal_opened">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <p class="modal__heading">Edit Profile</p>
+        <form class="modal__form">
+          <input class="modal__form-input" type="text" placeholder="name" name="title">
+          <input class="modal__form-input" type="text" placeholder="description" name="description">
+          <button class="modal__button" type="button">Save</button>
+        </form>
+      </div>
     </div>
     <script src="scripts/index.js"></script>
   </body>
