@@ -1,3 +1,14 @@
+const modal = document.querySelector('.modal');
+const profileEditBtn = document.querySelector('.profile__edit-button');
+profileEditBtn.addEventListener('click', function (e) {
+    modal.classList.add('modal_opened');
+});
+
+const modalCloseBtn = document.querySelector('.modal__close');
+modalCloseBtn.addEventListener('click', function () {
+    modal.classList.remove('modal_opened');
+});
+
 const initialCards = [
     {
         name: "Yosemite Valley",
@@ -24,3 +35,4 @@ const initialCards = [
         link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg "
     }
 ]
+
