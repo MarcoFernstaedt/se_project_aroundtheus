@@ -1,17 +1,3 @@
-const profileTitleText = document.querySelector('.profile__title');
-const profileDescriptionText = document.querySelector('.profile__description');
-const modal = document.querySelector('.modal');
-const profileEditBtn = document.querySelector('.profile__edit-button');
-
-profileEditBtn.addEventListener('click', function (e) {
-    modal.classList.add('modal_opened');
-});
-
-const modalCloseBtn = document.querySelector('.modal__close');
-modalCloseBtn.addEventListener('click', function () {
-    modal.classList.remove('modal_opened');
-});
-
 const initialCards = [
     {
         name: "Yosemite Valley",
@@ -39,9 +25,24 @@ const initialCards = [
     }
 ]
 
-const modalTitleInput = document.querySelector('.modal__form-input');
-modalTitleInput.getAttribute('title');
-console.log(modalTitleInput.value);
-if (modalTitleInput.value = "") {
-    modalTitleInput.value = profileTitleText.textContent
-}
+const profileTitleText = document.querySelector('.profile__title');
+const profileDescriptionText = document.querySelector('.profile__description');
+const profileEditBtn = document.querySelector('.profile__edit-button');
+const modal = document.querySelector('.modal');
+const modalCloseBtn = document.querySelector('.modal__close');
+const modalTitleInput = document.querySelector('#profile-title-input');
+const modalDescriptionInput = document.querySelector('#profile-description-input');
+
+profileEditBtn.addEventListener('click', function () {
+
+    modalTitleInput.value = String(profileTitleText.textContent)
+    modalDescriptionInput.value = String(profileDescriptionText.textContent);
+
+    modal.classList.add('modal_opened');
+});
+
+modalCloseBtn.addEventListener('click', function () {
+    modal.classList.remove('modal_opened');
+});
+
+
