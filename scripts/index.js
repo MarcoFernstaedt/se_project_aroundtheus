@@ -1,5 +1,8 @@
+const profileTitleText = document.querySelector('.profile__title');
+const profileDescriptionText = document.querySelector('.profile__description');
 const modal = document.querySelector('.modal');
 const profileEditBtn = document.querySelector('.profile__edit-button');
+
 profileEditBtn.addEventListener('click', function (e) {
     modal.classList.add('modal_opened');
 });
@@ -36,3 +39,9 @@ const initialCards = [
     }
 ]
 
+const modalTitleInput = document.querySelector('.modal__form-input');
+modalTitleInput.getAttribute('title');
+console.log(modalTitleInput.value);
+if (modalTitleInput.value = "") {
+    modalTitleInput.value = profileTitleText.textContent
+}
