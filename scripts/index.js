@@ -70,7 +70,7 @@ modalForm.addEventListener("submit", (evt) => {
     profileTitleText.textContent = modalTitleInput.value;
     profileDescriptionText.textContent = modalDescriptionInput.value;
 
-    closeModal();
+    handleCloseModal();
 });
 
 initialCards.forEach((data) => {
