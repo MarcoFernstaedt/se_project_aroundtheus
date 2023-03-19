@@ -33,7 +33,20 @@ const modalForm = modal.querySelector('.modal__form')
 const modalCloseBtn = document.querySelector('.modal__close');
 const modalTitleInput = document.querySelector('#profile-title-input');
 const modalDescriptionInput = document.querySelector('#profile-description-input');
+const cardListElement = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
+
+function getCardElement(data) {
+    const cardElement = cardTemplate.cloneNode(true);
+    const cardImageElement = cardElement.querySelector('.card__image');
+    const cardTitleElement = cardElement.querySelector('.card__title');
+
+    cardImageElement.src = data.link
+    cardImageElement.alt = data.name
+    cardTitleElement.textContent = data.name
+
+    return cardElement;
+}
 
 function handleCloseModal() {
     modal.classList.remove('modal_opened');
@@ -59,6 +72,7 @@ modalForm.addEventListener('submit', (evt) => {
 
 
 
-for (card of initialCards) {
-    console.log(card)
-}
+initialCards.forEach((data) => {
+    const cardElement = getCardElement(data);
+    cardListElement.prepend(cardElement);
+})
