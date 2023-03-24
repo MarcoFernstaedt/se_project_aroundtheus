@@ -42,7 +42,7 @@ const cardListElement = document.querySelector(".cards__list");
 const cardTemplate =
     document.querySelector("#card-template").content.firstElementChild;
 
-function getCardElement(data) {
+const getCardElement = data => {
     const cardElement = cardTemplate.cloneNode(true);
     const cardImageElement = cardElement.querySelector(".card__image");
     const cardTitleElement = cardElement.querySelector(".card__title");
