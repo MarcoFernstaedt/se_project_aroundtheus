@@ -52,14 +52,14 @@ function getCardElement(data) {
 }
 
 function handleCloseModal() {
-    modal.classList.remove("modal_opened");
+    editProfileModal.classList.remove("modal_opened");
 }
 
 profileEditBtn.addEventListener("click", function () {
     modalTitleInput.value = String(profileTitleText.textContent);
     modalDescriptionInput.value = String(profileDescriptionText.textContent);
 
-    modal.classList.add("modal_opened");
+    editProfileModal.classList.add("modal_opened");
 });
 
 modalCloseBtn.addEventListener("click", handleCloseModal);
