@@ -44,15 +44,16 @@ const cardTemplate = document.querySelector("#card-template").content.firstEleme
 const cardTitleInput = addCardModal.querySelector('#card-title-input');
 const cardImageInput = addCardModal.querySelector('#card-image-input');
 // https://images.unsplash.com/photo-1550330545-87c6109a81f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80
+
 const getCardElement = data => {
     const cardElement = cardTemplate.cloneNode(true);
     const cardImageElement = cardElement.querySelector(".card__image");
     const cardTitleElement = cardElement.querySelector(".card__title");
-    const likeButton = document.querySelector('.card__like-button');
-    console.log(likeButton)
-    // likeButton.addEventListener('click', () => {
-    //     likeButton.classList.toggle('card__like-button_active');
-    // });
+    const likeButton = cardElement.querySelector('.card__like-button');
+
+    likeButton.addEventListener('click', () => {
+        likeButton.classList.toggle('card__like-button_active');
+    });
 
     cardImageElement.src = data.link;
     cardImageElement.alt = data.name;
@@ -106,6 +107,4 @@ addCardModalForm.addEventListener('submit', (evt) => {
 
 initialCards.forEach((data) => {
     renderCard(data, cardListElement)
-    console.log(data)
 });
-
