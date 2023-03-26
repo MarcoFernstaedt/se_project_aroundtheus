@@ -49,7 +49,12 @@ const getCardElement = data => {
     const cardElement = cardTemplate.cloneNode(true);
     const cardImageElement = cardElement.querySelector(".card__image");
     const cardTitleElement = cardElement.querySelector(".card__title");
+    const deleteButton = cardElement.querySelector('.card__trashButton');
     const likeButton = cardElement.querySelector('.card__like-button');
+
+    deleteButton.addEventListener('click', () => {
+        cardElement.remove();
+    });
 
     likeButton.addEventListener('click', () => {
         likeButton.classList.toggle('card__like-button_active');

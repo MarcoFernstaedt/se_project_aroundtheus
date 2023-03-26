@@ -1,6 +1,7 @@
 .card {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 	list-style: none;
 }
 
@@ -9,6 +10,21 @@
 	width: 282px;
 	border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.card__trashButton {
+	position: absolute;
+	top: 23px;
+	right: 16px;
+	height: 14px;
+	width: 15px;
+	background: transparent url("../images/trash.svg") center no-repeat;
+	border: none;
+	cursor: pointer;
+}
+
+.card__trashButton:hover {
+	opacity: .5;;
 }
 
 .card__description {
