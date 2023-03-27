@@ -30,11 +30,13 @@ const profileDescriptionText = document.querySelector(".profile__description");
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const cardAddBtn = document.querySelector('.profile__add-button');
 const editProfileModal = document.querySelector("#edit-profile-modal");
-const addCardModal = document.querySelector("#add-card-modal")
+const addCardModal = document.querySelector("#add-card-modal");
+const previewImageModal = document.querySelector('#preview-card-modal');
 const editProfileModalForm = editProfileModal.querySelector(".modal__form");
 const addCardModalForm = addCardModal.querySelector('.modal__form');
 const profileModalCloseBtn = editProfileModal.querySelector(".modal__close");
 const addCardModalCloseBtn = addCardModal.querySelector(".modal__close");
+const previewImageModalCloseBtn = previewImageModal.querySelector('.modal__close');
 const editProfileModalTitleInput = document.querySelector("#profile-title-input");
 const editProfileModalDescriptionInput = document.querySelector(
     "#profile-description-input"
@@ -55,6 +57,13 @@ const getCardElement = data => {
     deleteButton.addEventListener('click', () => {
         cardElement.remove();
     });
+
+    cardImageElement.addEventListener('click', () => {
+        const cardImage = previewImageModal.querySelector('.modal__image');
+        cardImage.src = data.link
+        cardImage.alt = data.name
+        handleOpenModal(previewImageModal)
+    })
 
     likeButton.addEventListener('click', () => {
         likeButton.classList.toggle('card__like-button_active');
@@ -86,6 +95,7 @@ cardAddBtn.addEventListener('click', () => handleOpenModal(addCardModal));
 
 profileModalCloseBtn.addEventListener("click", () => handleCloseModal(editProfileModal));
 addCardModalCloseBtn.addEventListener("click", () => handleCloseModal(addCardModal));
+previewImageModalCloseBtn.addEventListener('click', () => handleCloseModal(previewImageModal))
 
 editProfileModalForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
