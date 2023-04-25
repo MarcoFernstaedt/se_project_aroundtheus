@@ -23,5 +23,4 @@ This project is a website containing a profile for Jacques Cousteau and differen
 
 **Github**
 
-- [Link to live site]
-  (https://marcofernstaedt.github.io/se_project_aroundtheus/)
+- [Link to live site](https://marcofernstaedt.github.io/se_project_aroundtheus/)
