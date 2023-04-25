@@ -67,6 +67,7 @@ const getCardElement = (data) => {
         cardImage.src = data.link;
         cardImage.alt = data.name;
         handleOpenModal(previewImageModal);
+        escapePressCloseModal(previewImageModal);
     });
 
     likeButton.addEventListener("click", () => {
@@ -95,16 +96,22 @@ profileEditBtn.addEventListener("click", function () {
     );
 
     handleOpenModal(editProfileModal);
+    escapePressCloseModal(editProfileModal);
 });
 
-cardAddBtn.addEventListener("click", () => handleOpenModal(addCardModal));
+cardAddBtn.addEventListener("click", () => {
+    handleOpenModal(addCardModal);
+    escapePressCloseModal(addCardModal);
+});
 
 profileModalCloseBtn.addEventListener("click", () =>
     handleCloseModal(editProfileModal)
 );
+
 addCardModalCloseBtn.addEventListener("click", () =>
     handleCloseModal(addCardModal)
 );
+
 previewImageModalCloseBtn.addEventListener("click", () =>
     handleCloseModal(previewImageModal)
 );
@@ -135,3 +142,24 @@ addCardModalForm.addEventListener("submit", (evt) => {
 initialCards.forEach((data) => {
     renderCard(data, cardListElement);
 });
+
+// MODAL CLOSE
+
+const keyHandler = (evt, modal) => {
+    if (evt.key === 'Escape') {
+        handleCloseModal(modal)
+    }
+}
+
+const overlayClickCloseModal = () => {
+    const overlays = document.querySelectorAll('.modal');
+    overlays.forEach((overlay) => {
+        overlay.addEventListener('click', () => handleCloseModal(overlay));
+    });
+};
+
+overlayClickCloseModal();
+
+const escapePressCloseModal = (modal) => {
+    document.body.addEventListener('keyup', (evt) => keyHandler(evt, modal));
+};

@@ -1,5 +1,4 @@
-// enabling validation by calling enableValidation()
-// pass all the settings on call
+// FORM VALIDATION
 
 const hideInputError = (formElem, inputElem, { inputErrorClass, errorClass }) => {
     const errorMessageElem = formElem.querySelector(`#${inputElem.id}-error`)
@@ -82,4 +81,3 @@ const config = {
 }
 
 enableValidation(config);
-
