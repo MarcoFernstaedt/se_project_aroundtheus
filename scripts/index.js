@@ -151,14 +151,23 @@ const keyHandler = (evt, modal) => {
     }
 }
 
-const overlayClickCloseModal = () => {
+const overlayEvent = () => {
     const overlays = document.querySelectorAll('.modal');
     overlays.forEach((overlay) => {
-        overlay.addEventListener('click', () => handleCloseModal(overlay));
+        overlay.addEventListener('click', (e) => {
+            overlayClickCloseModal(e.target);
+        });
+
     });
 };
 
-overlayClickCloseModal();
+overlayEvent()
+
+const handleOverlayClickClose = (e) => {
+    if (e.classList.contains('modal')) {
+        handleCloseModal(e)
+    };
+};
 
 const escapePressCloseModal = (modal) => {
     document.body.addEventListener('keyup', (evt) => keyHandler(evt, modal));
