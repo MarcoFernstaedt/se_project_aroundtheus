@@ -155,7 +155,7 @@ const overlayEvent = () => {
     const overlays = document.querySelectorAll('.modal');
     overlays.forEach((overlay) => {
         overlay.addEventListener('click', (e) => {
-            overlayClickCloseModal(e.target);
+            handleOverlayClickClose(e.target);
         });
 
     });
