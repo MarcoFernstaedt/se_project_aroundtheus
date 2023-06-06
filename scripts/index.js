@@ -145,13 +145,13 @@ initialCards.forEach((data) => {
 
 // MODAL CLOSE
 
-const keyHandler = (evt, modal) => {
+const handleEscape = (evt, modal) => {
     if (evt.key === 'Escape') {
         handleCloseModal(modal)
     }
 }
 
-const overlayEvent = () => {
+const handleOverlay = () => {
     const overlays = document.querySelectorAll('.modal');
     overlays.forEach((overlay) => {
         overlay.addEventListener('click', (e) => {
@@ -161,7 +161,7 @@ const overlayEvent = () => {
     });
 };
 
-overlayEvent()
+handleOverlay()
 
 const handleOverlayClickClose = (e) => {
     if (e.classList.contains('modal')) {
@@ -170,5 +170,5 @@ const handleOverlayClickClose = (e) => {
 };
 
 const escapePressCloseModal = (modal) => {
-    document.body.addEventListener('keyup', (evt) => keyHandler(evt, modal));
+    document.body.addEventListener('keyup', (evt) => handleEscape(evt, modal));
 };
