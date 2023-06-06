@@ -28,23 +28,23 @@ const hasInvalidInput = (inputElems) => {
     })
 };
 
-const inactiveButton = (submitButtonElem, { inactiveButtonClass }) => {
+const disableButton = (submitButtonElem, { inactiveButtonClass }) => {
     submitButtonElem.classList.add(inactiveButtonClass);
     submitButtonElem.disabled = true;
 };
 
-const activeButton = (submitButtonElem, { inactiveButtonClass }) => {
+const enableButton = (submitButtonElem, { inenableButtonClass }) => {
     submitButtonElem.classList.remove(inactiveButtonClass);
     submitButtonElem.disabled = false;
 };
 
 const toggleButtonState = (inputElems, submitButtonElem, { inactiveButtonClass }) => {
     if (hasInvalidInput(inputElems)) {
-        inactiveButton(submitButtonElem, { inactiveButtonClass });
+        disableButton(submitButtonElem, { inactiveButtonClass });
         return;
     }
 
-    activeButton(submitButtonElem, { inactiveButtonClass });
+    enableButton(submitButtonElem, { inactiveButtonClass });
 };
 
 const setEventListeners = (formElem, config) => {
