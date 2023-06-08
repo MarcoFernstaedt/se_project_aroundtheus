@@ -62,12 +62,12 @@ const getCardElement = (data) => {
         cardElement.remove();
     });
 
-    cardImageElement.addEventListener("click", () => {
+    cardImageElement.addEventListener("click", (evt) => {
         const cardImage = previewImageModal.querySelector(".modal__image");
         cardImage.src = data.link;
         cardImage.alt = data.name;
         handleOpenModal(previewImageModal);
-        escapePressCloseModal(previewImageModal);
+        closeByEscape(evt);
     });
 
     likeButton.addEventListener("click", () => {
@@ -83,38 +83,53 @@ const getCardElement = (data) => {
 
 const handleCloseModal = (modal) => {
     modal.classList.remove("modal_opened");
+    document.removeEventListener('keydown', closeByEscape);
 };
 
 const handleOpenModal = (modal) => {
     modal.classList.add("modal_opened");
+    document.addEventListener('keydown', closeByEscape);
 };
 
-profileEditBtn.addEventListener("click", function () {
+profileEditBtn.addEventListener("click", function (evt) {
     editProfileModalTitleInput.value = String(profileTitleText.textContent);
     editProfileModalDescriptionInput.value = String(
         profileDescriptionText.textContent
     );
 
     handleOpenModal(editProfileModal);
-    escapePressCloseModal(editProfileModal);
+    closeByEscape(evt);
 });
 
-cardAddBtn.addEventListener("click", () => {
+const modals = document.querySelectorAll('.modal');
+modals.forEach((modal) => {
+    modal.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('modal_opened')) {
+            handleCloseModal(modal);
+        }
+        if (evt.target.classList.contains('modal_close')) {
+            handleCloseModal(modal);
+            console.log('working')
+        }
+    })
+})
+
+cardAddBtn.addEventListener("click", (evt) => {
     handleOpenModal(addCardModal);
-    escapePressCloseModal(addCardModal);
+    closeByEscape(evt);
 });
 
-profileModalCloseBtn.addEventListener("click", () =>
-    handleCloseModal(editProfileModal)
-);
+// profileModalCloseBtn.addEventListener("click", () =>
+//     handleCloseModal(editProfileModal)
+// );
 
-addCardModalCloseBtn.addEventListener("click", () =>
-    handleCloseModal(addCardModal)
-);
+// addCardModalCloseBtn.addEventListener("click", () =>
+//     handleCloseModal(addCardModal)
+// );
 
-previewImageModalCloseBtn.addEventListener("click", () =>
-    handleCloseModal(previewImageModal)
-);
+// previewImageModalCloseBtn.addEventListener("click", () =>
+//     handleCloseModal(previewImageModal)
+// );
 
 editProfileModalForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
@@ -145,30 +160,36 @@ initialCards.forEach((data) => {
 
 // MODAL CLOSE
 
-const handleEscape = (evt, modal) => {
+// const handleEscape = (evt, modal) => {
+//     if (evt.key === 'Escape') {
+//         handleCloseModal(modal)
+//     }
+// }
+
+// const handleOverlay = () => {
+//     const overlays = document.querySelectorAll('.modal');
+//     overlays.forEach((overlay) => {
+//         overlay.addEventListener('click', (e) => {
+//             handleOverlayClickClose(e.target);
+//         });
+
+//     });
+// };
+
+// handleOverlay()
+
+// const handleOverlayClickClose = (e) => {
+//     if (e.classList.contains('modal')) {
+//         handleCloseModal(e)
+//     };
+// };
+
+// close modal with escape key
+// adding event listeners modals ln/104
+const closeByEscape = (evt) => {
+
     if (evt.key === 'Escape') {
-        handleCloseModal(modal)
+        const openModal = document.querySelector('.modal_opened');
+        handleCloseModal(openModal)
     }
 }
-
-const handleOverlay = () => {
-    const overlays = document.querySelectorAll('.modal');
-    overlays.forEach((overlay) => {
-        overlay.addEventListener('click', (e) => {
-            handleOverlayClickClose(e.target);
-        });
-
-    });
-};
-
-handleOverlay()
-
-const handleOverlayClickClose = (e) => {
-    if (e.classList.contains('modal')) {
-        handleCloseModal(e)
-    };
-};
-
-const escapePressCloseModal = (modal) => {
-    document.body.addEventListener('keyup', (evt) => handleEscape(evt, modal));
-};
