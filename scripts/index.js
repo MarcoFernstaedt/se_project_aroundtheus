@@ -107,7 +107,7 @@ modals.forEach((modal) => {
         if (evt.target.classList.contains('modal_opened')) {
             handleCloseModal(modal);
         }
-        if (evt.target.classList.contains('modal_close')) {
+        if (evt.target.classList.contains('modal__close')) {
             handleCloseModal(modal);
             console.log('working')
         }
@@ -148,9 +148,10 @@ const renderCard = (data, wrapper) => {
 addCardModalForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
 
-    const name = cardTitleInput.value;
-    const link = cardImageInput.value;
+    let name = cardTitleInput.value;
+    let link = cardImageInput.value;
     renderCard({ name, link }, cardListElement);
+    addCardModalForm.reset()
     handleCloseModal(addCardModal);
 });
 
