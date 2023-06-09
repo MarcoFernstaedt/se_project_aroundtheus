@@ -65,7 +65,7 @@ const getCardElement = (data) => {
         cardImage.src = data.link;
         cardImage.alt = data.name;
         handleOpenModal(previewImageModal);
-
+        previewImageModal.querySelector('.modal__caption').textContent = data.name;
     });
 
     likeButton.addEventListener("click", () => {
@@ -101,7 +101,7 @@ profileEditBtn.addEventListener("click", function (evt) {
 const modals = document.querySelectorAll('.modal');
 modals.forEach((modal) => {
     modal.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('modal_opened')) {
+        if (evt.target.classList.contains('modal_opened') || evt.target.classList.contains('modal__container-preview')) {
             handleCloseModal(modal);
         }
         if (evt.target.classList.contains('modal__close')) {
