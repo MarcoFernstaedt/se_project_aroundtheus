@@ -33,8 +33,8 @@ const disableButton = (submitButtonElem, { inactiveButtonClass }) => {
     submitButtonElem.disabled = true;
 };
 
-const enableButton = (submitButtonElem, { inenableButtonClass }) => {
-    submitButtonElem.classList.remove(inenableButtonClass);
+const enableButton = (submitButtonElem, { inactiveButtonClass }) => {
+    submitButtonElem.classList.remove(inactiveButtonClass);
     submitButtonElem.disabled = false;
 };
 
