@@ -134,6 +134,10 @@ addCardModalForm.addEventListener("submit", (evt) => {
     const link = cardImageInput.value;
     renderCard({ name, link }, cardListElement);
     addCardModalForm.reset()
+
+    const addCardSubmitButton = addCardModalForm.querySelector('.modal__button');
+    toggleButtonState([cardTitleInput, cardImageInput], addCardSubmitButton, config)
+
     handleCloseModal(addCardModal);
 });
 
