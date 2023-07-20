@@ -1,3 +1,5 @@
+import Card from "../components/Card";
+
 const initialCards = [
     {
         name: "Yosemite Valley",
@@ -41,6 +43,14 @@ const editProfileModalTitleInput = document.querySelector(
 const editProfileModalDescriptionInput = document.querySelector(
     "#profile-description-input"
 );
+
+// const cardDatas = {
+//     name: "hahaha",
+//     link: "hahahah",
+// }
+
+// const card = new Card(cardDatas)
+
 const cardListElement = document.querySelector(".cards__list");
 const cardTemplate =
     document.querySelector("#card-template").content.firstElementChild;
