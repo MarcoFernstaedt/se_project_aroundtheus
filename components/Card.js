@@ -14,7 +14,6 @@ export default class Card {
         this._cardElement.querySelector('.card__trashButton').addEventListener('click', () => {
             this._handleDeleteCard()
         })
-        // card image
 
     }
 
@@ -36,7 +35,7 @@ export default class Card {
     // })
 
     getView() {
-        this._cardElement = document.querySelector(this._cardSelector).content.cloneNode(true);
+        this._cardElement = document.querySelector("#card-template").content.firstElementChild.cloneNode(true);
 
         this._setEventListeners()
 
