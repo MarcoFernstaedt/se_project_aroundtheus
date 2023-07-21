@@ -19,7 +19,7 @@ export default class Card {
     }
 
     _toggleLikeButton() {
-        this._cardElement.querySelector('card__like-button').classList.toggle('card__like-button_active');
+        this._cardElement.querySelector('.card__like-button').classList.toggle('card__like-button_active');
     }
 
     _handleDeleteCard() {
@@ -40,10 +40,10 @@ export default class Card {
 
         this._setEventListeners()
 
-        this._cardElement.querySelector('.card__image').src = this.link;
-        this._cardElement.querySelector('.card__image').alt = this.name;
-        this._cardElement.querySelector('.card__title').textContent = this.name;
+        this._cardElement.querySelector('.card__image').src = this._link;
+        this._cardElement.querySelector('.card__image').alt = this._name;
+        this._cardElement.querySelector('.card__title').textContent = this._name;
 
-        // return _cardElement
+        return this._cardElement
     }
 }
