@@ -1,4 +1,4 @@
-import Card from "../components/Card";
+import Card from "../components/Card.js";
 
 const initialCards = [
     {
@@ -44,12 +44,11 @@ const editProfileModalDescriptionInput = document.querySelector(
     "#profile-description-input"
 );
 
-// const cardDatas = {
-//     name: "hahaha",
-//     link: "hahahah",
-// }
-
-// const card = new Card(cardDatas)
+// create instance of Card class
+for (let current in initialCards) {
+    const card = new Card(current, "#card-template");
+    card.getView()
+};
 
 const cardListElement = document.querySelector(".cards__list");
 const cardTemplate =
