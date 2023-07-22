@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
     {
@@ -140,7 +141,8 @@ addCardModalForm.addEventListener("submit", (evt) => {
     addCardModalForm.reset()
 
     const addCardSubmitButton = addCardModalForm.querySelector('.modal__button');
-    toggleButtonState([cardTitleInput, cardImageInput], addCardSubmitButton, config)
+    const formValidator = new FormValidator(config, addCardModal)
+    formValidator._toggleButtonState([cardTitleInput, cardImageInput])
 
     handleCloseModal(addCardModal);
 });
