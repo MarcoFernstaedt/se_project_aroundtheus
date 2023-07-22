@@ -8,6 +8,31 @@ export default class FormValidator {
         this._formElement = formElement;
     }
 
+    _disableButton() {
+        this._submitButtonSelector.classList.add(this._inactiveButtonClass);
+        this._submitButtonSelector.disabled = true;
+    };
+    
+    _enableButton() {
+        this._submitButtonSelector.classList.remove(this._inactiveButtonClass);
+        this._submitButtonSelector.disabled = false;
+    };
+
+    _hideInputError(inputElem) {
+        const errorMessageElem = this._formElement.querySelector(`#${inputElem.id}-error`)
+        inputElem.classList.remove(this._inputErrorClass);
+        errorMessageElem.textContent = "";
+        errorMessageElem.classList.remove(errorClass);
+    }
+
+    _checkInputValidity() {
+        if (!inputElem.validity.valid) {
+            this._showInputError(this._formElement, inputElem, this.settings);
+        } else {
+            this._hideInputError(this.formElem, inputElem, this.settings);
+        }
+    }
+
     _showInputError(inputElem, errorMessage) {
         const errorMessageElem = this._formElement.querySelector(`#${inputElem.id}-error`)
         inputElem.classList.add(this._inputErrorClass);
@@ -15,7 +40,7 @@ export default class FormValidator {
         errorMessageElem.classList.add(this._errorClass);
     }
 
-    _hasInvalidInput() {
+    _hasInvalidInput(inputElems) {
         return !inputElems.every((inputElem) => {
             return inputElem.validity.valid;
         })
@@ -23,31 +48,31 @@ export default class FormValidator {
 
     _toggleButtonState(inputElems) {
         if (this._hasInvalidInput(inputElems)) {
-            disableButton(this._submitButtonSelector, this._inactiveButtonClass);
+            this._disableButton(this._submitButtonSelector, this._inactiveButtonClass);
             return;
         }
     
-        enableButton(submitButtonElem, { inactiveButtonClass });
+        this._enableButton(this._submitButtonSelector, this.inactiveButtonClass);
     };
 
     _setEventListeners() {
         const inputElems = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-        const buttonElem = this.form.querySelector(this._submitButtonSelector);
+        const buttonElem = this._formElement.querySelector(this._submitButtonSelector);
 
         inputElems.forEach((inputElem) => {
             inputElem.addEventListener('input', (evt) => {
-                this._checkInputValidity(this_formElement, inputElem, config);
+                this._checkInputValidity(this_formElement, inputElem, this.settings);
                 this._toggleButtonState(inputElems);
             });
         });
     }
 
     enableValidation() {
-        this._formElem.addEventListener('submit', (evt) => {
+        this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
 
-        setEventListeners(formElem, config);
+        setEventListeners(formElem, this.settings);
     }
 }
 
@@ -60,42 +85,22 @@ const settings = {
     errorClass: "modal__error-visible"
 }
 
-const editFormValidator = new FormValidator(settings, editForm);
-const addFormValidator = new FormValidator(settings, addForm);
 
-
-//  const hideInputError = (formElement, inputElem, { inputErrorClass, errorClass }) => {
-//     const errorMessageElem = this.formElementent.querySelector(`#${inputElem.id}-error`)
-//     inputElem.classList.remove(inputErrorClass);
-//     errorMessageElem.textContent = "";
-//     errorMessageElem.classList.remove(errorClass);
-// }
+ 
 
 // const showInputError = (formElement, inputElem, { inputErrorClass, errorClass }) => {
     
 // };
 
-// const checkInputValidity = (formElem, inputElem, config) => {
-//     if (!inputElem.validity.valid) {
-//         showInputError(formElem, inputElem, config);
-//     } else {
-//         hideInputError(formElem, inputElem, config);
-//     }
+// const checkInputValidity = (formElem, inputElem, this.settings) => {
+    
 // };
 
 // const hasInvalidInput = (inputElems) => {
 //     
 // };
 
-// const disableButton = (submitButtonElem, { inactiveButtonClass }) => {
-//     submitButtonElem.classList.add(inactiveButtonClass);
-//     submitButtonElem.disabled = true;
-// };
 
-// const enableButton = (submitButtonElem, { inactiveButtonClass }) => {
-//     submitButtonElem.classList.remove(inactiveButtonClass);
-//     submitButtonElem.disabled = false;
-// };
 
 
 
