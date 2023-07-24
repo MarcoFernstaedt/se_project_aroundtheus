@@ -52,6 +52,10 @@ const cardTitleInput = addCardModal.querySelector("#card-title-input");
 const cardImageInput = addCardModal.querySelector("#card-image-input");
 // https://images.unsplash.com/photo-1550330545-87c6109a81f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80
 
+const addCardFormValidator = new FormValidator(config, addCardModal)
+addCardFormValidator.enableValidation();
+// const editProfileFormValidator = new FormValidator(config, editProfileModal)
+
 // const getCardElement = (data) => {
 //     const cardElement = cardTemplate.cloneNode(true);
 //     const cardImageElement = cardElement.querySelector(".card__image");
@@ -140,8 +144,8 @@ addCardModalForm.addEventListener("submit", (evt) => {
     renderCard({ name, link }, cardListElement);
     addCardModalForm.reset()
 
-    const addCardSubmitButton = addCardModalForm.querySelector('.modal__button');
-    const formValidator = new FormValidator(config, addCardModal)
+    // const addCardSubmitButton = addCardModalForm.querySelector('.modal__button');
+
     formValidator._toggleButtonState([cardTitleInput, cardImageInput])
 
     handleCloseModal(addCardModal);
