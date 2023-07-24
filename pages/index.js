@@ -155,7 +155,7 @@ addCardModalForm.addEventListener("submit", (evt) => {
 
     // const addCardSubmitButton = addCardModalForm.querySelector('.modal__button');
 
-    formValidator._toggleButtonState([cardTitleInput, cardImageInput])
+    addCardFormValidator._toggleButtonState([cardTitleInput, cardImageInput])
 
     handleCloseModal(addCardModal);
 });

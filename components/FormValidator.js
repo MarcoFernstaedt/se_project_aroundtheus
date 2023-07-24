@@ -9,27 +9,27 @@ export default class FormValidator {
     }
 
     _disableButton() {
-        this._submitButtonSelector.classList.add(this._inactiveButtonClass);
-        this._submitButtonSelector.disabled = true;
+        this._formElement.querySelector(this._submitButtonSelector).classList.add(this._inactiveButtonClass);
+        this._formElement.querySelector(this._submitButtonSelector).disabled = true;
     };
     
     _enableButton() {
-        this._submitButtonSelector.classList.remove(this._inactiveButtonClass);
-        this._submitButtonSelector.disabled = false;
+        this._formElement.querySelector(this._submitButtonSelector).classList.remove(this._inactiveButtonClass);
+        this._formElement.querySelector(this._submitButtonSelector).disabled = false;
     };
 
     _hideInputError(inputElem) {
         const errorMessageElem = this._formElement.querySelector(`#${inputElem.id}-error`)
         inputElem.classList.remove(this._inputErrorClass);
         errorMessageElem.textContent = "";
-        errorMessageElem.classList.remove(errorClass);
+        errorMessageElem.classList.remove(this._errorClass);
     }
 
     _checkInputValidity(inputElem) {
         if (!inputElem.validity.valid) {
-            this._showInputError(this._formElement, inputElem, this.settings);
+            this._showInputError(inputElem);
         } else {
-            this._hideInputError(this.formElem, inputElem, this.settings);
+            this._hideInputError(inputElem);
         }
     }
 
@@ -61,7 +61,7 @@ export default class FormValidator {
 
         inputElems.forEach((inputElem) => {
             inputElem.addEventListener('input', (evt) => {
-                this._checkInputValidity(this._formElement, inputElem, this.settings);
+                this._checkInputValidity(inputElem);
                 this._toggleButtonState(inputElems);
             });
         });
@@ -76,14 +76,14 @@ export default class FormValidator {
     }
 }
 
-const settings = {
-    formSelector: ".modal__form",
-    inputSelector: ".modal__form-input",
-    submitButtonSelector: ".modal__button",
-    inactiveButtonClass: "modal__button_disabled",
-    inputErrorClass: "modal__input_type_error",
-    errorClass: "modal__error-visible"
-}
+// const settings = {
+//     formSelector: ".modal__form",
+//     inputSelector: ".modal__form-input",
+//     submitButtonSelector: ".modal__button",
+//     inactiveButtonClass: "modal__button_disabled",
+//     inputErrorClass: "modal__input_type_error",
+//     errorClass: "modal__error-visible"
+// }
 
 
  
