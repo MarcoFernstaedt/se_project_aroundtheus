@@ -61,9 +61,11 @@ const settings = {
     errorClass: "modal__error-visible"
 }
 
-const addCardFormValidator = new FormValidator(settings, addCardModalForm)
+const addCardFormValidator = new FormValidator(settings, addCardModalForm);
 addCardFormValidator.enableValidation();
-// const editProfileFormValidator = new FormValidator(config, editProfileModal)
+
+const editProfileFormValidator = new FormValidator(settings, editProfileModalForm);
+editProfileFormValidator.enableValidation();
 
 // const getCardElement = (data) => {
 //     const cardElement = cardTemplate.cloneNode(true);
@@ -136,6 +138,9 @@ editProfileModalForm.addEventListener("submit", (evt) => {
 
     profileTitleText.textContent = editProfileModalTitleInput.value;
     profileDescriptionText.textContent = editProfileModalDescriptionInput.value;
+
+    editProfileFormValidator._toggleButtonState(editProfileModalTitleInput, editProfileModalDescriptionInput);
+
     handleCloseModal(editProfileModal);
 });
 
