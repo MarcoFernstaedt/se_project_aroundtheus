@@ -52,7 +52,16 @@ const cardTitleInput = addCardModal.querySelector("#card-title-input");
 const cardImageInput = addCardModal.querySelector("#card-image-input");
 // https://images.unsplash.com/photo-1550330545-87c6109a81f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80
 
-const addCardFormValidator = new FormValidator(config, addCardModal)
+const settings = {
+    formSelector: ".modal__form",
+    inputSelector: ".modal__form-input",
+    submitButtonSelector: ".modal__button",
+    inactiveButtonClass: "modal__button_disabled",
+    inputErrorClass: "modal__input_type_error",
+    errorClass: "modal__error-visible"
+}
+
+const addCardFormValidator = new FormValidator(settings, addCardModalForm)
 addCardFormValidator.enableValidation();
 // const editProfileFormValidator = new FormValidator(config, editProfileModal)
 
