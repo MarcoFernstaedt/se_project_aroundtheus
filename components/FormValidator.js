@@ -48,13 +48,11 @@ export default class FormValidator {
         })
     }
 
-    _toggleButtonState(inputElems, buttonElem) {
-        this._inputElems.forEach((inputElem) => {
-            if (this._hasInvalidInput()) {
-                this._disableButton();
-                return;
-            }
-        })
+    _toggleButtonState() {
+        if (this._hasInvalidInput()) {
+            this._disableButton();
+            return;
+        }
 
         this._enableButton();
     };
