@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import {handleCloseModal, handleOpenModal} from "../utils/utils.js";
 
 const initialCards = [
     {
@@ -98,15 +99,15 @@ editProfileFormValidator.enableValidation();
 //     return cardElement;
 // };
 
-const handleCloseModal = (modal) => {
-    modal.classList.remove("modal_opened");
-    document.removeEventListener('keydown', closeByEscape);
-};
+// const handleCloseModal = (modal) => {
+//     modal.classList.remove("modal_opened");
+//     document.removeEventListener('keydown', closeByEscape);
+// };
 
-const handleOpenModal = (modal) => {
-    modal.classList.add("modal_opened");
-    document.addEventListener('keydown', closeByEscape);
-};
+// const handleOpenModal = (modal) => {
+//     modal.classList.add("modal_opened");
+//     document.addEventListener('keydown', closeByEscape);
+// };
 
 profileEditBtn.addEventListener("click", function (evt) {
     editProfileModalTitleInput.value = String(profileTitleText.textContent);
@@ -170,10 +171,10 @@ initialCards.forEach((data) => {
 });
 
 // close modal with escape key
-const closeByEscape = (evt) => {
+// const closeByEscape = (evt) => {
 
-    if (evt.key === 'Escape') {
-        const openModal = document.querySelector('.modal_opened');
-        handleCloseModal(openModal)
-    }
-}
+//     if (evt.key === 'Escape') {
+//         const openModal = document.querySelector('.modal_opened');
+//         handleCloseModal(openModal)
+//     }
+// }
