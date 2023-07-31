@@ -16,4 +16,4 @@ const closeByEscape = (evt) => {
     }
 }
 
-export {handleCloseModal, handleOpenModal};
+export { handleCloseModal, handleOpenModal };
