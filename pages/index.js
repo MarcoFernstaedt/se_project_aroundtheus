@@ -35,9 +35,11 @@ const profileEditBtn = document.querySelector(".profile__edit-button");
 const cardAddBtn = document.querySelector(".profile__add-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const addCardModal = document.querySelector("#add-card-modal");
-const previewImageModal = document.querySelector("#preview-card-modal");
-const editProfileModalForm = editProfileModal.querySelector(".modal__form");
-const addCardModalForm = addCardModal.querySelector(".modal__form");
+// const previewImageModal = document.querySelector("#preview-card-modal");
+// const editProfileModalForm = editProfileModal.querySelector(".modal__form");
+// const addCardModalForm = addCardModal.querySelector(".modal__form");
+const profileForm = document.forms["profile-form"];
+const cardForm = document.forms["card-form"];
 
 const editProfileModalTitleInput = document.querySelector(
   "#profile-title-input"
@@ -47,13 +49,13 @@ const editProfileModalDescriptionInput = document.querySelector(
 );
 
 const cardListElement = document.querySelector(".cards__list");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+// const cardTemplate =
+//   document.querySelector("#card-template").content.firstElementChild;
 const cardTitleInput = addCardModal.querySelector("#card-title-input");
 const cardImageInput = addCardModal.querySelector("#card-image-input");
 // https://images.unsplash.com/photo-1550330545-87c6109a81f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80
 
-const settings = {
+const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__button",
@@ -62,62 +64,30 @@ const settings = {
   errorClass: "modal__error-visible",
 };
 
-const addCardFormValidator = new FormValidator(settings, addCardModalForm);
-addCardFormValidator.enableValidation();
+const formValidators = {}
 
-const editProfileFormValidator = new FormValidator(
-  settings,
-  editProfileModalForm
-);
-editProfileFormValidator.enableValidation();
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElem) => {
+    const validator = new FormValidator(config, formElem)
+    const formName = formElem.getAttribute('name')
 
-// const getCardElement = (data) => {
-//     const cardElement = cardTemplate.cloneNode(true);
-//     const cardImageElement = cardElement.querySelector(".card__image");
-//     const cardTitleElement = cardElement.querySelector(".card__title");
-//     const deleteButton = cardElement.querySelector(".card__trashButton");
-//     const likeButton = cardElement.querySelector(".card__like-button");
-//     const cardImage = previewImageModal.querySelector(".modal__image");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+   
+  });
+};
 
-//     deleteButton.addEventListener("click", () => {
-//         cardElement.remove();
-//     });
-
-//     cardImageElement.addEventListener("click", (evt) => {
-//         cardImage.src = data.link;
-//         cardImage.alt = data.name;
-//         handleOpenModal(previewImageModal);
-//         previewImageModal.querySelector('.modal__caption').textContent = data.name;
-//     });
-
-//     likeButton.addEventListener("click", () => {
-//         likeButton.classList.toggle("card__like-button_active");
-//     });
-
-//     cardImageElement.src = data.link;
-//     cardImageElement.alt = data.name;
-//     cardTitleElement.textContent = data.name;
-
-//     return cardElement;
-// };
-
-// const handleCloseModal = (modal) => {
-//     modal.classList.remove("modal_opened");
-//     document.removeEventListener('keydown', closeByEscape);
-// };
-
-// const handleOpenModal = (modal) => {
-//     modal.classList.add("modal_opened");
-//     document.addEventListener('keydown', closeByEscape);
-// };
+enableValidation(config);
 
 profileEditBtn.addEventListener("click", function (evt) {
   editProfileModalTitleInput.value = String(profileTitleText.textContent);
   editProfileModalDescriptionInput.value = String(
     profileDescriptionText.textContent
   );
-
+  
   handleOpenModal(editProfileModal);
+  formValidators['profile-form'].resetValidation()
 });
 
 const modals = document.querySelectorAll(".modal");
@@ -137,39 +107,35 @@ modals.forEach((modal) => {
 
 cardAddBtn.addEventListener("click", (evt) => {
   handleOpenModal(addCardModal);
+  formValidators['card-form'].resetValidation()
 });
 
-editProfileModalForm.addEventListener("submit", (evt) => {
+profileForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
   profileTitleText.textContent = editProfileModalTitleInput.value;
   profileDescriptionText.textContent = editProfileModalDescriptionInput.value;
 
-  editProfileFormValidator._toggleButtonState(
-    editProfileModalTitleInput,
-    editProfileModalDescriptionInput
-  );
-
   handleCloseModal(editProfileModal);
 });
 
+const createCard = data => {
+  const cardElement = new Card(data, "#card-template");
+  return cardElement.getView();
+}
+
 const renderCard = (data, wrapper) => {
-  const card = new Card(data, "#card-template");
-  const cardElement = card.getView();
+  const cardElement = createCard;
   wrapper.prepend(cardElement);
 };
 
-addCardModalForm.addEventListener("submit", (evt) => {
+cardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
   renderCard({ name, link }, cardListElement);
-  addCardModalForm.reset();
-
-  // const addCardSubmitButton = addCardModalForm.querySelector('.modal__button');
-
-  addCardFormValidator._toggleButtonState([cardTitleInput, cardImageInput]);
+  cardForm.reset();
 
   handleCloseModal(addCardModal);
 });
@@ -178,11 +144,3 @@ initialCards.forEach((data) => {
   renderCard(data, cardListElement);
 });
 
-// close modal with escape key
-// const closeByEscape = (evt) => {
-
-//     if (evt.key === 'Escape') {
-//         const openModal = document.querySelector('.modal_opened');
-//         handleCloseModal(openModal)
-//     }
-// }
