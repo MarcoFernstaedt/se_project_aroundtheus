@@ -125,7 +125,7 @@ const createCard = data => {
 }
 
 const renderCard = (data, wrapper) => {
-  const cardElement = createCard;
+  const cardElement = createCard(data);
   wrapper.prepend(cardElement);
 };
 
