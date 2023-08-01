@@ -5,8 +5,12 @@ export default class Card {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        
+        this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
+        this._likeButton = this._cardElement.querySelector('.card__like-button')
 
-        this._cardElement = document.querySelector("#card-template").content.firstElementChild.cloneNode(true);
+        this._previewModal = document.querySelector('#preview-card-modal');
+        this._previewModalImage = this._previewModal.querySelector('.modal__image');
     }
 
     _setEventListeners() {
@@ -16,9 +20,9 @@ export default class Card {
         })
 
         this._cardElement.querySelector('.card__image').addEventListener('click', () => {
-            this._previewModal = document.querySelector('#preview-card-modal');
-            this._previewModal.querySelector('.modal__image').src = this._link;
-            this._previewModal.querySelector('.modal__image').alt = this._name;
+            
+            this._previewModalImage.src = this._link;
+            this._previewModalImage.alt = this._name;
             this._previewModal.querySelector('.modal__caption').textContent = this._name;
             handleOpenModal(this._previewModal);
         });
@@ -31,21 +35,13 @@ export default class Card {
     }
 
     _toggleLikeButton() {
-        this._cardElement.querySelector('.card__like-button').classList.toggle('card__like-button_active');
+        this._likeButton.classList.toggle('card__like-button_active');
     }
 
     _handleDeleteCard() {
         this._cardElement.remove()
         this._cardElement = null;
     }
-
-    // _cardImageData() {
-    //     this._cardElement.querySelector('.card__image').src = this.link;
-    //     this._cardElement.querySelector('.card__image').alt = this.name;
-    // }
-    // this._cardElement.querySelector('.card__image').addEventListener('click', () => {
-    //     this._cardImageData()
-    // })
 
     getView() {
         this._setEventListeners()
