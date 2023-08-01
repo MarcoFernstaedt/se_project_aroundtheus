@@ -7,17 +7,18 @@ export default class FormValidator {
         this._errorClass = settings.errorClass;
         this._formElement = formElement;
 
-        this._inputElems = Array.from(this._formElement.querySelectorAll(this._inputSelector))
+        this._inputElems = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
     }
 
     _disableButton() {
-        this._formElement.querySelector(this._submitButtonSelector).classList.add(this._inactiveButtonClass);
-        this._formElement.querySelector(this._submitButtonSelector).disabled = true;
+        this._submitButton.classList.add(this._inactiveButtonClass);
+        this._submitButton.disabled = true;
     };
 
     _enableButton() {
-        this._formElement.querySelector(this._submitButtonSelector).classList.remove(this._inactiveButtonClass);
-        this._formElement.querySelector(this._submitButtonSelector).disabled = false;
+        this._submitButton.classList.remove(this._inactiveButtonClass);
+        this._submitButton.disabled = false;
     };
 
     _hideInputError(inputElem) {
@@ -48,6 +49,14 @@ export default class FormValidator {
         })
     }
 
+    resetValidation() {
+        this._toggleButtonState();
+
+        this._inputList.forEach((inputElement) => {
+        this._hideError(inputElement)
+      });
+    };
+
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
             this._disableButton();
@@ -61,7 +70,7 @@ export default class FormValidator {
         this._inputElems.forEach((inputElem, index, array) => {
             inputElem.addEventListener('input', (evt) => {
                 this._checkInputValidity(inputElem);
-                this._toggleButtonState(array, this._submitButtonSelector);
+                this._toggleButtonState();
             });
         });
     }
@@ -71,7 +80,7 @@ export default class FormValidator {
             evt.preventDefault();
         });
 
-        this._setEventListeners(this._formElement, this.settings);
+        this._setEventListeners();
     }
 }
 
