@@ -7,6 +7,7 @@ export default class Card {
         this._cardSelector = cardSelector;
         
         this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
+        this._cardImage = this._cardElement.querySelector('.card__image')
         this._likeButton = this._cardElement.querySelector('.card__like-button')
 
         this._previewModal = document.querySelector('#preview-card-modal');
@@ -46,8 +47,8 @@ export default class Card {
     getView() {
         this._setEventListeners()
 
-        this._cardElement.querySelector('.card__image').src = this._link;
-        this._cardElement.querySelector('.card__image').alt = this._name;
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
         this._cardElement.querySelector('.card__title').textContent = this._name;
 
         return this._cardElement
