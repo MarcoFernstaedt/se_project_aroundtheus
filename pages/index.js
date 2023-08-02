@@ -36,8 +36,6 @@ const cardAddBtn = document.querySelector(".profile__add-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const addCardModal = document.querySelector("#add-card-modal");
 // const previewImageModal = document.querySelector("#preview-card-modal");
-// const editProfileModalForm = editProfileModal.querySelector(".modal__form");
-// const addCardModalForm = addCardModal.querySelector(".modal__form");
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
 
@@ -49,8 +47,6 @@ const editProfileModalDescriptionInput = document.querySelector(
 );
 
 const cardListElement = document.querySelector(".cards__list");
-// const cardTemplate =
-//   document.querySelector("#card-template").content.firstElementChild;
 const cardTitleInput = addCardModal.querySelector("#card-title-input");
 const cardImageInput = addCardModal.querySelector("#card-image-input");
 // https://images.unsplash.com/photo-1550330545-87c6109a81f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80
