@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopuuWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 import { handleCloseModal, handleOpenModal } from "../utils/utils.js";
 
 const initialCards = [
@@ -36,7 +37,7 @@ const profileTitleText = document.querySelector(".profile__title");
 const profileDescriptionText = document.querySelector(".profile__description");
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const cardAddBtn = document.querySelector(".profile__add-button");
-const editProfileModal = document.querySelector("#edit-profile-modal");
+// const editProfileModal = document.querySelector("#edit-profile-modal");
 
 // const previewImageModal = document.querySelector("#preview-card-modal");
 const profileForm = document.forms["profile-form"];
@@ -118,9 +119,16 @@ const addCardModal = new PopupWithForm("#add-card-modal", (cardData) => {
 });
 addCardModal.setEventListeners();
 
+const userName = "#profile-title-input"
+const userJob = "#profile-description-input"
+const userInfo = new UserInfo(userName, userJob)
+
 const profileModal = new PopupWithForm(
   "#edit-profile-modal",
-  (profileData) => {}
+  (profileData) => {
+    userInfo.setUserInfo(profileData.name, profileData.job)
+    profileModal.close()
+  }
 );
 
 cardAddBtn.addEventListener("click", (evt) => {
