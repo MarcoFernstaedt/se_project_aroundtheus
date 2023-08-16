@@ -51,8 +51,8 @@ const editProfileModalDescriptionInput = document.querySelector(
 );
 
 const cardListElement = document.querySelector(".cards__list");
-const cardTitleInput = addCardModal.querySelector("#card-title-input");
-const cardImageInput = addCardModal.querySelector("#card-image-input");
+// const cardTitleInput = addCardModal.querySelector("#card-title-input");
+// const cardImageInput = addCardModal.querySelector("#card-image-input");
 // https://images.unsplash.com/photo-1550330545-87c6109a81f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80
 
 const config = {
@@ -91,8 +91,12 @@ profileEditBtn.addEventListener("click", function (evt) {
 
 const cardSelector = "#card-template";
 
+const handleImageClick = ({ name, link }) => {
+  imageModal.open(name, link);
+};
+
 const renderCard = (cardData) => {
-  const card = new Card(cardData, cardSelector);
+  const card = new Card(cardData, handleImageClick, cardSelector);
   return card.getView();
 };
 

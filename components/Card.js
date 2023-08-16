@@ -19,7 +19,7 @@ export default class Card {
             this._toggleLikeButton()
         })
 
-        this._cardElement.querySelector(this._cardImage).addEventListener('click', () => {
+        this._cardImage.addEventListener('click', () => {
             this._handleImageClick({name: this._name, link: this._link});
         });
         
