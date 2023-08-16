@@ -87,26 +87,12 @@ profileEditBtn.addEventListener("click", function (evt) {
   formValidators['profile-form'].resetValidation()
 });
 
-const modals = document.querySelectorAll(".modal");
-modals.forEach((modal) => {
-  modal.addEventListener("mousedown", (evt) => {
-    if (
-      evt.target.classList.contains("modal_opened") ||
-      evt.target.classList.contains("modal__container-preview")
-    ) {
-      handleCloseModal(modal);
-    }
-    if (evt.target.classList.contains("modal__close")) {
-      handleCloseModal(modal);
-    }
-  });
-});
 
 const cardSelector = "#card-template"
 
 const renderCard = (cardData) => {
   const card = new Card(cardData, cardSelector)
-  return card.getView
+  return card.getView();
 };
 
 const section = new Section(
