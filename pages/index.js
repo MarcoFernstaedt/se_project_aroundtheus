@@ -1,5 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import PopuuWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import { handleCloseModal, handleOpenModal } from "../utils/utils.js";
 
@@ -35,7 +37,7 @@ const profileDescriptionText = document.querySelector(".profile__description");
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const cardAddBtn = document.querySelector(".profile__add-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
-const addCardModal = document.querySelector("#add-card-modal");
+
 // const previewImageModal = document.querySelector("#preview-card-modal");
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
@@ -61,17 +63,16 @@ const config = {
   errorClass: "modal__error-visible",
 };
 
-const formValidators = {}
+const formValidators = {};
 
 const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElem) => {
-    const validator = new FormValidator(config, formElem)
-    const formName = formElem.getAttribute('name')
+    const validator = new FormValidator(config, formElem);
+    const formName = formElem.getAttribute("name");
 
     formValidators[formName] = validator;
     validator.enableValidation();
-   
   });
 };
 
@@ -82,16 +83,15 @@ profileEditBtn.addEventListener("click", function (evt) {
   editProfileModalDescriptionInput.value = String(
     profileDescriptionText.textContent
   );
-  
+
   handleOpenModal(editProfileModal);
-  formValidators['profile-form'].resetValidation()
+  formValidators["profile-form"].resetValidation();
 });
 
-
-const cardSelector = "#card-template"
+const cardSelector = "#card-template";
 
 const renderCard = (cardData) => {
-  const card = new Card(cardData, cardSelector)
+  const card = new Card(cardData, cardSelector);
   return card.getView();
 };
 
@@ -107,9 +107,25 @@ const section = new Section(
 );
 section.renderItems();
 
+const imageModalSelector = "#preview-card-modal";
+const imageModal = new PopuuWithImage(imageModalSelector);
+imageModal.setEventListeners();
+
+const addCardModal = new PopupWithForm("#add-card-modal", (cardData) => {
+  const card = new Card(cardData);
+
+  section.addItem(card);
+});
+addCardModal.setEventListeners();
+
+const profileModal = new PopupWithForm(
+  "#edit-profile-modal",
+  (profileData) => {}
+);
+
 cardAddBtn.addEventListener("click", (evt) => {
   handleOpenModal(addCardModal);
-  formValidators['card-form'].resetValidation()
+  formValidators["card-form"].resetValidation();
 });
 
 profileForm.addEventListener("submit", (evt) => {
