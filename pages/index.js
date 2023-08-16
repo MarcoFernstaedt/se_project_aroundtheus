@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 import { handleCloseModal, handleOpenModal } from "../utils/utils.js";
 
 const initialCards = [
@@ -101,6 +102,25 @@ modals.forEach((modal) => {
   });
 });
 
+const cardSelector = "#card-template"
+
+const renderCard = (cardData) => {
+  const card = new Card(cardData, cardSelector)
+  return card.getView
+};
+
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = renderCard(item);
+      section.addItem(card);
+    },
+  },
+  ".cards__list"
+);
+section.renderItems();
+
 cardAddBtn.addEventListener("click", (evt) => {
   handleOpenModal(addCardModal);
   formValidators['card-form'].resetValidation()
@@ -115,28 +135,18 @@ profileForm.addEventListener("submit", (evt) => {
   handleCloseModal(editProfileModal);
 });
 
-const createCard = data => {
-  const cardElement = new Card(data, "#card-template");
-  return cardElement.getView();
-}
-
-const renderCard = (data, wrapper) => {
-  const cardElement = createCard(data);
-  wrapper.prepend(cardElement);
-};
+// const createCard = data => {
+//   const cardElement = new Card(data, "#card-template");
+//   return cardElement.getView();
+// }
 
 cardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
-  renderCard({ name, link }, cardListElement);
+  renderCard({ name, link });
   cardForm.reset();
 
   handleCloseModal(addCardModal);
 });
-
-initialCards.forEach((data) => {
-  renderCard(data, cardListElement);
-});
-
