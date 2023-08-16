@@ -4,7 +4,7 @@ import PopuuWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import { handleCloseModal, handleOpenModal } from "../utils/utils.js";
+// import { handleCloseModal, handleOpenModal } from "../utils/utils.js";
 
 const initialCards = [
   {

@@ -1,5 +1,3 @@
-import Popup from "/Popup.js";
-
 export default class UserInfo {
     constructor({name, job}) {
         this._name = name;

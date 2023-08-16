@@ -1,10 +1,9 @@
-import { handleOpenModal } from "../utils/utils.js";
-
 export default class Card {
-    constructor({ name, link }, cardSelector) {
+    constructor({ name, link }, handeImageClick, cardSelector) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        this._handleImageClick = handeImageClick;
         
         this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.card__image')
@@ -20,14 +19,10 @@ export default class Card {
             this._toggleLikeButton()
         })
 
-        this._cardElement.querySelector('.card__image').addEventListener('click', () => {
-            
-            this._previewModalImage.src = this._link;
-            this._previewModalImage.alt = this._name;
-            this._previewModal.querySelector('.modal__caption').textContent = this._name;
-            handleOpenModal(this._previewModal);
+        this._cardElement.querySelector(this._cardImage).addEventListener('click', () => {
+            this._handleImageClick({name: this._name, link: this._link});
         });
-
+        
         // delete button
         this._cardElement.querySelector('.card__trashButton').addEventListener('click', () => {
             this._handleDeleteCard()
@@ -54,3 +49,8 @@ export default class Card {
         return this._cardElement
     }
 }
+
+// Connect the Card class to the popup. 
+// Make Card take the handleCardClick() function into the constructor. 
+// When the user clicks on the card, this function will 
+// open the popup with an image.
