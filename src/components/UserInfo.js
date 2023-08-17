@@ -6,13 +6,13 @@ export default class UserInfo {
 
     getUserInfo() {
         return {
-            name: this._name.textContent, 
-            job: this._job.textContent,
+            name: this._name, 
+            job: this._job,
         };
     }
 
     setUserInfo(name, job) {
-        this._name.textContent = name;
-        this._job.textContent = job;
+        this._nameTextField = document.querySelector('.profile__title').textContent = name
+        this._jobTextField = document.querySelector('.profile__description').textContent = job;
     }
 }

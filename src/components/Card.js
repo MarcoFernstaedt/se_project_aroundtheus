@@ -5,7 +5,7 @@ export default class Card {
         this._cardSelector = cardSelector;
         this._handleImageClick = handeImageClick;
         
-        this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
+        this._cardElement = document.querySelector("#card-template").content.firstElementChild.cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.card__image')
         this._likeButton = this._cardElement.querySelector('.card__like-button')
 
