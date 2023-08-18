@@ -26,14 +26,16 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
-
 enableValidation(config);
 
-profileEditBtn.addEventListener("click", function (evt) {
-  // userInfo.getUserInfo()
-  let info = userInfo.getUserInfo();
+const userNameSelector = "#profile-title-input";
+const userJobSelector = "#profile-description-input";
+const userInfo = new UserInfo(userNameSelector, userJobSelector);
 
-  editProfileModalTitleInput.value = String(info.name);
+profileEditBtn.addEventListener("click", () => {
+  const info = userInfo.getUserInfo();
+  console.log(info)
+  editProfileModalTitleInput.value = info.name;
   editProfileModalDescriptionInput.value = String(info.job);
 
   profileModal.open();
@@ -73,10 +75,6 @@ const addCardModal = new PopupWithForm("#add-card-modal", (cardData) => {
   section.addItem(card);
 });
 addCardModal.setEventListeners();
-
-const userName = "#profile-title-input";
-const userJob = "#profile-description-input";
-const userInfo = new UserInfo(userName, userJob);
 
 const profileModal = new PopupWithForm("#edit-profile-modal", (profileData) => {
   userInfo.setUserInfo(profileData.name, profileData.job);
