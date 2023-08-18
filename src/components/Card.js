@@ -5,17 +5,14 @@ export default class Card {
         this._cardSelector = cardSelector;
         this._handleImageClick = handeImageClick;
         
-        this._cardElement = document.querySelector("#card-template").content.firstElementChild.cloneNode(true);
+        this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.card__image')
         this._likeButton = this._cardElement.querySelector('.card__like-button')
-
-        this._previewModal = document.querySelector('#preview-card-modal');
-        this._previewModalImage = this._previewModal.querySelector('.modal__image');
     }
 
     _setEventListeners() {
         // like button 
-        this._cardElement.querySelector('.card__like-button').addEventListener('click', () => {
+        this._likeButton.addEventListener('click', () => {
             this._toggleLikeButton()
         })
 
