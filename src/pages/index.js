@@ -28,8 +28,8 @@ const enableValidation = (config) => {
 };
 enableValidation(config);
 
-const userNameSelector = "#profile-title-input";
-const userJobSelector = "#profile-description-input";
+const userNameSelector = ".profile__title";
+const userJobSelector = ".profile__description";
 const userInfo = new UserInfo(userNameSelector, userJobSelector);
 
 profileEditBtn.addEventListener("click", () => {
