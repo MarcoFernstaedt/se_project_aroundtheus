@@ -33,10 +33,9 @@ const userJobSelector = ".profile__description";
 const userInfo = new UserInfo(userNameSelector, userJobSelector);
 
 profileEditBtn.addEventListener("click", () => {
-  const info = userInfo.getUserInfo();
-  console.log(info)
-  editProfileModalTitleInput.value = info.name;
-  editProfileModalDescriptionInput.value = String(info.job);
+  const {userName, userJob} = userInfo.getUserInfo();
+  editProfileModalTitleInput.value = userName;
+  editProfileModalDescriptionInput.value = userJob;
 
   profileModal.open();
   formValidators["profile-form"].resetValidation();
