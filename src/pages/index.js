@@ -11,6 +11,7 @@ import {
   editProfileModalTitleInput,
   cardAddBtn,
   profileEditBtn,
+  selectors,
 } from "../utils/utils.js";
 import "../pages/index.css";
 
@@ -28,9 +29,7 @@ const enableValidation = (config) => {
 };
 enableValidation(config);
 
-const userNameSelector = ".profile__title";
-const userJobSelector = ".profile__description";
-const userInfo = new UserInfo(userNameSelector, userJobSelector);
+const userInfo = new UserInfo(selectors.userNameSelector, selectors.userJobSelector);
 
 profileEditBtn.addEventListener("click", () => {
   const {userName, userJob} = userInfo.getUserInfo();
@@ -38,10 +37,8 @@ profileEditBtn.addEventListener("click", () => {
   editProfileModalDescriptionInput.value = userJob;
 
   profileModal.open();
-  formValidators["profile-form"].resetValidation();
+  formValidators[selectors.profileFormSelector].resetValidation();
 });
-
-const cardSelector = "#card-template";
 
 const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
@@ -60,22 +57,21 @@ const section = new Section(
       section.addItem(card);
     },
   },
-  ".cards__list"
+  selectors.cardListSelector
 );
 section.renderItems();
 
-const imageModalSelector = "#preview-card-modal";
-const imageModal = new PopuuWithImage(imageModalSelector);
+const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
-const addCardModal = new PopupWithForm("#add-card-modal", (cardData) => {
+const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
   const card = renderCard(cardData);
-  // addCardModal.close()
+  // cardModal.close()
   section.addItem(card);
 });
-addCardModal.setEventListeners();
+cardModal.setEventListeners();
 
-const profileModal = new PopupWithForm("#edit-profile-modal", (profileData) => {
+const profileModal = new PopupWithForm(selectors.profileModalSelector, (profileData) => {
   userInfo.setUserInfo(profileData.name, profileData.job);
 
   // profileTitleText.textContent = editProfileModalTitleInput.value
@@ -85,9 +81,9 @@ const profileModal = new PopupWithForm("#edit-profile-modal", (profileData) => {
 });
 profileModal.setEventListeners();
 
-cardAddBtn.addEventListener("click", (evt) => {
-  addCardModal.open();
-  formValidators["card-form"].resetValidation();
+cardAddBtn.addEventListener("click", () => {
+  cardModal.open();
+  formValidators[selectors.cardFormSelector].resetValidation();
 });
 
 // profileForm.addEventListener("submit", (evt) => {
@@ -106,5 +102,5 @@ cardAddBtn.addEventListener("click", (evt) => {
 
 // cardForm.addEventListener("submit", (evt) => {
 //   evt.preventDefault();
-//   addCardModal.close()
+//   cardModal.close()
 // });

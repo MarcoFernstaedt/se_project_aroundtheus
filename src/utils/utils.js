@@ -53,6 +53,18 @@ const config = {
   errorClass: "modal__error-visible",
 };
 
+const selectors = {
+  userNameSelector: ".profile__title",
+  userJobSelector: ".profile__description",
+  imageModalSelector: "#preview-card-modal",
+  cardListSelector: ".cards__list",
+  cardSelector: "#card-template",
+  cardModalSelector: "#add-card-modal",
+  cardFormSelector: "card-form",
+  profileModalSelector: "#add-card-modal",
+  profileFormSelector: "profile-form",
+}
+
 export {
   initialCards,
   config,
@@ -66,4 +78,5 @@ export {
   profileEditBtn,
   profileDescriptionText,
   profileTitleText,
+  selectors,
 };
