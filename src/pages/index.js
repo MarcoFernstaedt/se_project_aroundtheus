@@ -33,6 +33,7 @@ const userInfo = new UserInfo(selectors.userNameSelector, selectors.userJobSelec
 
 profileEditBtn.addEventListener("click", () => {
   const {userName, userJob} = userInfo.getUserInfo();
+
   editProfileModalTitleInput.value = userName;
   editProfileModalDescriptionInput.value = userJob;
 
@@ -45,7 +46,7 @@ const handleImageClick = ({ name, link }) => {
 };
 
 const renderCard = (cardData) => {
-  const card = new Card(cardData, handleImageClick, cardSelector);
+  const card = new Card(cardData, handleImageClick, selectors.cardSelector);
   return card.getView();
 };
 
