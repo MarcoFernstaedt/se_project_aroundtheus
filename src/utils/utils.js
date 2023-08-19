@@ -61,7 +61,7 @@ const selectors = {
   cardSelector: "#card-template",
   cardModalSelector: "#add-card-modal",
   cardFormSelector: "card-form",
-  profileModalSelector: "#add-card-modal",
+  profileModalSelector: "#edit-profile-modal",
   profileFormSelector: "profile-form",
 }
 

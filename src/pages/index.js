@@ -38,7 +38,7 @@ profileEditBtn.addEventListener("click", () => {
   editProfileModalDescriptionInput.value = userJob;
 
   profileModal.open();
-  formValidators[selectors.profileFormSelector].resetValidation();
+  formValidators["profile-form"].resetValidation();
 });
 
 const handleImageClick = ({ name, link }) => {
