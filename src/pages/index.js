@@ -29,10 +29,15 @@ const enableValidation = (config) => {
 };
 enableValidation(config);
 
-const userInfo = new UserInfo(selectors.userNameSelector, selectors.userJobSelector);
+const userInfo = new UserInfo(
+  selectors.userNameSelector,
+  selectors.userJobSelector
+);
+
+console.log(userInfo.getUserInfo())
 
 profileEditBtn.addEventListener("click", () => {
-  const {userName, userJob} = userInfo.getUserInfo();
+  const { userName, userJob } = userInfo.getUserInfo();
 
   editProfileModalTitleInput.value = userName;
   editProfileModalDescriptionInput.value = userJob;
@@ -67,19 +72,22 @@ imageModal.setEventListeners();
 
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
   const card = renderCard(cardData);
-  // cardModal.close()
   section.addItem(card);
+  cardModal.close();
 });
 cardModal.setEventListeners();
 
-const profileModal = new PopupWithForm(selectors.profileModalSelector, (profileData) => {
-  userInfo.setUserInfo(profileData.name, profileData.job);
+const profileModal = new PopupWithForm(
+  selectors.profileModalSelector,
+  (profileData) => {
+    userInfo.setUserInfo(profileData.name, profileData.job);
 
-  // profileTitleText.textContent = editProfileModalTitleInput.value
-  // profileDescriptionText.textContent = editProfileModalDescriptionInput.value
+    // profileTitleText.textContent = editProfileModalTitleInput.value
+    // profileDescriptionText.textContent = editProfileModalDescriptionInput.value
 
-  profileModal.close();
-});
+    profileModal.close();
+  }
+);
 profileModal.setEventListeners();
 
 cardAddBtn.addEventListener("click", () => {
