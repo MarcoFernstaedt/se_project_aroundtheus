@@ -79,10 +79,6 @@ const profileModal = new PopupWithForm(
   selectors.profileModalSelector,
   (profileData) => {
     userInfo.setUserInfo(profileData.name, profileData.job);
-
-    // profileTitleText.textContent = editProfileModalTitleInput.value
-    // profileDescriptionText.textContent = editProfileModalDescriptionInput.value
-
     profileModal.close();
   }
 );
@@ -92,22 +88,3 @@ cardAddBtn.addEventListener("click", () => {
   cardModal.open();
   formValidators[selectors.cardFormSelector].resetValidation();
 });
-
-// profileForm.addEventListener("submit", (evt) => {
-//   evt.preventDefault();
-
-//   // profileTitleText.textContent = editProfileModalTitleInput.value;
-//   // profileDescriptionText.textContent = editProfileModalDescriptionInput.value;
-
-//   profileModal.close()
-// });
-
-// const createCard = data => {
-//   const cardElement = new Card(data, "#card-template");
-//   return cardElement.getView();
-// }
-
-// cardForm.addEventListener("submit", (evt) => {
-//   evt.preventDefault();
-//   cardModal.close()
-// });
