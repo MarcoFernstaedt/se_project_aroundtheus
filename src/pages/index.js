@@ -34,11 +34,9 @@ const userInfo = new UserInfo(
   selectors.userJobSelector
 );
 
-console.log(userInfo.getUserInfo())
-
 profileEditBtn.addEventListener("click", () => {
   const info = userInfo.getUserInfo();
-  console.log(info)
+  
   editProfileModalTitleInput.value = info.name;
   editProfileModalDescriptionInput.value = info.job;
 
