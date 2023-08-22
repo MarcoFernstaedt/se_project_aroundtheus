@@ -7,7 +7,7 @@ export default class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   close() {
     this._popup.classList.remove("modal_opened");
