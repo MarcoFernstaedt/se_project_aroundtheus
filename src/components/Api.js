@@ -63,6 +63,12 @@ export default class Api {
     }).then(this._handleResponce);
   }
 
+  showCardLikes(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      headers: this._header,
+    }).then(this._handleResponce)
+  }
+
   addCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
