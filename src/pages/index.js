@@ -31,7 +31,9 @@ api
   .getInitialCards()
   .then((res) => {
     if (res.ok) {
-      res.json()
+      return res.json()
+    } else {
+      return Promise.reject(`Error: ${res.status}`)
     }
   })
   .then(console.log(data))
