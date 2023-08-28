@@ -18,7 +18,7 @@ export default class Api {
     }).then(this._handleResponce);
   }
 
-  editUserInfo() {
+  editUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._header,
@@ -27,5 +27,32 @@ export default class Api {
         job: data.job,
       }),
     }).then(this._handleResponce);
+  }
+
+  editProfilePthoto(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._header,
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    }).then(this._handleResponce);
+  }
+
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._header,
+    }).then(this._handleResponce);
+  }
+
+  createCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._header,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
+    }).then(this._handleResponce)
   }
 }
