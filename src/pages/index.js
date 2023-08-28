@@ -31,7 +31,7 @@ api
   .getInitialCards()
   .then((res) => {
     if (res.ok) {
-      res.Json()
+      res.json()
     }
   })
   .then(console.log(data))
