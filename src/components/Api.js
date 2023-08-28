@@ -53,6 +53,27 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then(this._handleResponce)
+    }).then(this._handleResponce);
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._header,
+    }).then(this._handleResponce);
+  }
+
+  addCardLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._header,
+    }).then(this._handleResponce);
+  }
+
+  removeCardLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._header,
+    }).then(this._handleResponce);
   }
 }
