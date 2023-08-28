@@ -13,8 +13,19 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this.baseUrl}/users/me`, {
-      header: this.header,
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._header,
+    }).then(this._handleResponce);
+  }
+
+  editUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._header,
+      body: JSON.stringify({
+        name: data.name,
+        job: data.job,
+      }),
     }).then(this._handleResponce);
   }
 }
