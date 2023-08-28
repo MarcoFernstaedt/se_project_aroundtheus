@@ -4,6 +4,7 @@ import PopuuWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import {
   initialCards,
   config,
@@ -14,6 +15,29 @@ import {
   selectors,
 } from "../utils/utils.js";
 import "../pages/index.css";
+
+const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3";
+const apiUrl = "https://around-api.en.tripleten-services.com/v1";
+
+const api = new Api({
+  baseUrl: apiUrl,
+  headers: {
+    authorization: apiToken,
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((res) => {
+    if (res.ok) {
+      res.Json()
+    }
+  })
+  .then(console.log(data))
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });
 
 const formValidators = {};
 
