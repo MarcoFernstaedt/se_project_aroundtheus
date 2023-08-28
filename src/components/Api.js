@@ -8,7 +8,13 @@ export default class Api {
     if (res.ok) {
       return res.json();
     } else {
-      return res.status;
+      return Promise.reject(res.status);
     }
+  }
+
+  getUserInfo() {
+    return fetch(`${this.baseUrl}/users/me`, {
+      header: this.header,
+    }).then(this._handleResponce);
   }
 }
