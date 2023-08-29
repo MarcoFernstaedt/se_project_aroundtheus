@@ -16,27 +16,27 @@ import {
 } from "../utils/utils.js";
 import "../pages/index.css";
 
-const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3";
-const apiUrl = "https://around-api.en.tripleten-services.com/v1";
+// const apiToken = ;
+// const apiUrl = ;
 
 const api = new Api({
-  baseUrl: apiUrl,
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: apiToken,
+    authorization: "2aecf13b-f884-4550-afc8-5336476728b3",
     "Content-Type": "application/json",
   },
 });
 
+const userInfo = new UserInfo(
+  selectors.userNameSelector,
+  selectors.userJobSelector
+);
+
 api
-  .getInitialCards()
+  .getUserInfo()
   .then((res) => {
-    if (res.ok) {
-      return res.json()
-    } else {
-      return Promise.reject(`Error: ${res.status}`)
-    }
+    console.log(res);
   })
-  .then(console.log(data))
   .catch((err) => {
     console.error(err); // log the error to the console
   });
@@ -54,11 +54,6 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(config);
-
-const userInfo = new UserInfo(
-  selectors.userNameSelector,
-  selectors.userJobSelector
-);
 
 profileEditBtn.addEventListener("click", () => {
   const info = userInfo.getUserInfo();
