@@ -34,15 +34,6 @@ const userInfo = new UserInfo(
   selectors.userJobSelector
 );
 
-api
-  .getInitialCards()
-  .then((res) => {
-      console.log(res);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
     userId = data._id;
@@ -90,17 +81,22 @@ profileEditBtn.addEventListener("click", () => {
   formValidators["profile-form"].resetValidation();
 });
 
-const handleImageClick = ({ name, link }) => {
-  imageModal.open({ name, link });
+const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
+  const card = new Card({
+    name,
+    link,
+    userId,
+    _id,
+    ownerId,
+    likes,
+    handleImageClick,
+    cardSelector: selectors.cardSelector,
+  });
+  return card.getView();
 };
 
-const renderCard = (cardData, userId) => {
-  const card = new Card(
-    { cardData, userId },
-    handleImageClick,
-    selectors.cardSelector
-  );
-  return card.getView();
+const handleImageClick = ({ name, link }) => {
+  imageModal.open({ name, link });
 };
 
 // const renderCard = (cardData) => {
@@ -111,22 +107,17 @@ const renderCard = (cardData, userId) => {
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
-// api.getInitialCards().then((res) => {
-//   console.log(res)
-// });
-
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
   section.addItem(renderCard(cardData));
   api
     .createCard(cardData)
     .then((data) => {
-      section.addItem(renderCard(data, userId))
+      section.addItem(renderCard(data, userId));
       cardModal.close();
     })
     .catch((err) => {
-      console.error(err)
-    })
-
+      console.error(err);
+    });
 });
 cardModal.setEventListeners();
 
