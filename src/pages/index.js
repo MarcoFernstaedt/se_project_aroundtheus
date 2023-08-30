@@ -16,16 +16,16 @@ import {
 } from "../utils/utils.js";
 import "../pages/index.css";
 
-// const apiToken = ;
-// const apiUrl = ;
+const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3";
+const apiUrl = "https://around-api.en.tripleten-services.com/v1";
 
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  baseUrl: apiUrl,
   headers: {
-    authorization: "2aecf13b-f884-4550-afc8-5336476728b3",
+    authorization: apiToken,
     "Content-Type": "application/json",
-  },
-});
+  }
+})
 
 const userInfo = new UserInfo(
   selectors.userNameSelector,
@@ -35,7 +35,7 @@ const userInfo = new UserInfo(
 api
   .getUserInfo()
   .then((res) => {
-    console.log(res);
+      console.log(res);
   })
   .catch((err) => {
     console.error(err); // log the error to the console
