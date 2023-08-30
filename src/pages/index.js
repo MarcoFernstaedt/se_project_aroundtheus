@@ -33,6 +33,7 @@ const userInfo = new UserInfo(
   selectors.userNameSelector,
   selectors.userJobSelector
 );
+x;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
