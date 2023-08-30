@@ -8,7 +8,7 @@ export default class Card {
         this._likes = likes;
         this._handleImageClick = handeImageClick;
         this._cardSelector = cardSelector;
-        console.log(this._likes)
+        // console.log(this._likes)
         this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.card__image')
         this._likeButton = this._cardElement.querySelector('.card__like-button')
