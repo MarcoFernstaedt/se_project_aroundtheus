@@ -4,7 +4,7 @@ export default class Api {
     this._headers = headers;
   }
 
-  __handeResponces(res) {
+  _handleResponce(res) {
     if (res.ok) {
       return res.json();
     } else {
@@ -18,13 +18,13 @@ export default class Api {
     }).then(this._handleResponce);
   }
 
-  editUserInfo(data) {
+  editUserInfo({name, job}) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        about: data.about,
+        name: name,
+        about: job,
       }),
     }).then(this._handleResponce);
   }
@@ -40,11 +40,9 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/Cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      this._handleResponce;
-    });
+    }).then(this._handleResponce);
   }
 
   createCard(data) {

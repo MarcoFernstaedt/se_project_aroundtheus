@@ -18,27 +18,52 @@ import "../pages/index.css";
 
 const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3";
 const apiUrl = "https://around-api.en.tripleten-services.com/v1";
+let userId = null;
 
 const api = new Api({
   baseUrl: apiUrl,
   headers: {
     authorization: apiToken,
     "Content-Type": "application/json",
-  }
-})
+  },
+});
 
 const userInfo = new UserInfo(
   selectors.userNameSelector,
   selectors.userJobSelector
 );
 
-api
-  .getUserInfo()
-  .then((res) => {
-      console.log(res);
+// api
+//   .getUserInfo()
+//   .then((res) => {
+//       console.log(res);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, cards]) => {
+    userId = data._id;
+    userInfo.setUserInfo({
+      name: data.name,
+      job: data.about,
+    });
+
+    const section = new Section(
+      {
+        items: initialCards,
+        renderer: (item) => {
+          const card = renderCard(item);
+          section.addItem(card);
+        },
+      },
+      selectors.cardListSelector
+    );
+    section.renderItems();
   })
   .catch((err) => {
-    console.error(err); // log the error to the console
+    console.log(err);
   });
 
 const formValidators = {};
@@ -74,20 +99,13 @@ const renderCard = (cardData) => {
   return card.getView();
 };
 
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = renderCard(item);
-      section.addItem(card);
-    },
-  },
-  selectors.cardListSelector
-);
-section.renderItems();
-
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
+
+api.getInitialCards()
+  .then((res) => {
+    console.log(res)
+  })
 
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
   const card = renderCard(cardData);
@@ -99,8 +117,15 @@ cardModal.setEventListeners();
 const profileModal = new PopupWithForm(
   selectors.profileModalSelector,
   (profileData) => {
-    userInfo.setUserInfo(profileData.name, profileData.job);
-    profileModal.close();
+    api
+      .editUserInfo(profileData)
+      .then((profileData) => {
+        userInfo.setUserInfo(profileData.name, profileData.job);
+        profileModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 );
 profileModal.setEventListeners();
