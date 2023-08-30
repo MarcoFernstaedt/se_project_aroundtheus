@@ -1,13 +1,14 @@
 export default class Card {
-    constructor({ name, link}, cardSelector, handeImageClick ) {
+    constructor({ name, link, userId, _id, ownerId, likes}, handeImageClick, cardSelector ) {
         this._name = name;
         this._link = link;
-        // this._userId = data.userId;
-        // this._cardId = data._id;
-        // this._ownerId = data.ownerId;
-        this._cardSelector = cardSelector;
+        this._userId = userId;
+        this._cardId = _id;
+        this._ownerId = ownerId;
+        this._likes = likes;
         this._handleImageClick = handeImageClick;
-        
+        this._cardSelector = cardSelector;
+        console.log(this._likes)
         this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.card__image')
         this._likeButton = this._cardElement.querySelector('.card__like-button')

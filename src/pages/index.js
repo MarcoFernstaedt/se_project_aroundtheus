@@ -28,9 +28,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-// initialCards.forEach((card) => {
-//   api.createCard(card)
-// })
 
 const userInfo = new UserInfo(
   selectors.userNameSelector,
@@ -38,7 +35,7 @@ const userInfo = new UserInfo(
 );
 
 // api
-//   .getUserInfo()
+//   .getInitialCards()
 //   .then((res) => {
 //       console.log(res);
 //   })
@@ -56,17 +53,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     section = new Section(
       {
-        items: initialCards,
+        items: cards,
         renderer: (cardData) => {
-          section.addItem(renderCard(cardData));
+          section.addItem(renderCard(cardData, userId));
         },
       },
-      selectors.cardListSelector,
+      selectors.cardListSelector
     );
     section.renderItems();
   })
   .catch((err) => {
-    console.log(err);
+    console.error(err);
   });
 
 const formValidators = {};
@@ -97,32 +94,39 @@ const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
 
-// const renderCard = (cardData, userId) => {
-//   const card = new Card({
-//     data: { cardData, userId },
-//     selector: selectors.cardSelector,
-//     handleImageClick: handleImageClick,
-//   });
-//   return card.getView();
-// }
-
-const renderCard = (cardData) => {
-  const card = new Card(cardData, handleImageClick, selectors.cardSelector);
+const renderCard = (cardData, userId) => {
+  const card = new Card(
+    { cardData, userId },
+    handleImageClick,
+    selectors.cardSelector
+  );
   return card.getView();
 };
+
+// const renderCard = (cardData) => {
+//   const card = new Card(cardData, handleImageClick, selectors.cardSelector);
+//   return card.getView();
+// };
 
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
-api.getInitialCards()
-  .then((res) => {
-    // console.log(res)
-  })
+// api.getInitialCards().then((res) => {
+//   console.log(res)
+// });
 
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
   section.addItem(renderCard(cardData));
+  api
+    .createCard(cardData)
+    .then((data) => {
+      section.addItem(renderCard(data, userId))
+      cardModal.close();
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 
-  cardModal.close();
 });
 cardModal.setEventListeners();
 
