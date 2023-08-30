@@ -58,10 +58,10 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       {
         items: initialCards,
         renderer: (cardData) => {
-          section.addItem(renderCard(cardData, userId));
+          section.addItem(renderCard(cardData));
         },
       },
-      selectors.cardListSelector
+      selectors.cardListSelector,
     );
     section.renderItems();
   })
@@ -97,19 +97,19 @@ const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
 
-const renderCard = (cardData, userId) => {
-  const card = new Card({
-    data: { cardData, userId },
-    selector: selectors.cardSelector,
-    handleImageClick: handleImageClick,
-  });
-  return card.getView();
-}
-
-// const renderCard = (cardData, user) => {
-//   const card = new Card(cardData, handleImageClick, selectors.cardSelector);
+// const renderCard = (cardData, userId) => {
+//   const card = new Card({
+//     data: { cardData, userId },
+//     selector: selectors.cardSelector,
+//     handleImageClick: handleImageClick,
+//   });
 //   return card.getView();
-// };
+// }
+
+const renderCard = (cardData) => {
+  const card = new Card(cardData, handleImageClick, selectors.cardSelector);
+  return card.getView();
+};
 
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
