@@ -34,14 +34,14 @@ const userInfo = new UserInfo(
   selectors.userJobSelector
 );
 
-// api
-//   .getInitialCards()
-//   .then((res) => {
-//       console.log(res);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
+api
+  .getInitialCards()
+  .then((res) => {
+      console.log(res);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
