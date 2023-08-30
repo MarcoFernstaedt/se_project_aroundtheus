@@ -19,6 +19,7 @@ import "../pages/index.css";
 const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3";
 const apiUrl = "https://around-api.en.tripleten-services.com/v1";
 let userId = null;
+let section = null;
 
 const api = new Api({
   baseUrl: apiUrl,
@@ -27,6 +28,9 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+// initialCards.forEach((card) => {
+//   api.createCard(card)
+// })
 
 const userInfo = new UserInfo(
   selectors.userNameSelector,
@@ -50,12 +54,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       job: data.about,
     });
 
-    const section = new Section(
+    section = new Section(
       {
         items: initialCards,
-        renderer: (item) => {
-          const card = renderCard(item);
-          section.addItem(card);
+        renderer: (cardData) => {
+          section.addItem(renderCard(cardData, userId));
         },
       },
       selectors.cardListSelector
@@ -94,22 +97,31 @@ const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
 
-const renderCard = (cardData) => {
-  const card = new Card(cardData, handleImageClick, selectors.cardSelector);
+const renderCard = (cardData, userId) => {
+  const card = new Card({
+    data: { cardData, userId },
+    selector: selectors.cardSelector,
+    handleImageClick: handleImageClick,
+  });
   return card.getView();
-};
+}
+
+// const renderCard = (cardData, user) => {
+//   const card = new Card(cardData, handleImageClick, selectors.cardSelector);
+//   return card.getView();
+// };
 
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
 api.getInitialCards()
   .then((res) => {
-    console.log(res)
+    // console.log(res)
   })
 
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
-  const card = renderCard(cardData);
-  section.addItem(card);
+  section.addItem(renderCard(cardData));
+
   cardModal.close();
 });
 cardModal.setEventListeners();
