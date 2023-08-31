@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({ name, link, userId, _id, ownerId, likes, handleImageClick, cardSelector }) {
+    constructor({ name, link, userId, _id, ownerId, likes, handleImageClick, handleDeleteClick, cardSelector }) {
         this._name = name;
         this._link = link;
         this._userId = userId;
@@ -7,7 +7,9 @@ export default class Card {
         this._ownerId = ownerId;
         this._likes = likes;
         this._handleImageClick = handleImageClick;
+        this._handleDeleteClick = handleDeleteClick;
         this._cardSelector = cardSelector;
+        
         this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.card__image')
         this._likeButton = this._cardElement.querySelector('.card__like-button')
@@ -24,9 +26,7 @@ export default class Card {
         });
         
         // delete button
-        this._cardElement.querySelector('.card__trashButton').addEventListener('click', () => {
-            this._handleDeleteCard()
-        });
+        this._cardElement.querySelector('.card__trashButton').addEventListener('click', () => this._handleDeleteClick(this));
 
     }
 
@@ -45,7 +45,7 @@ export default class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
         this._cardElement.querySelector('.card__title').textContent = this._name;
-
+        // this._isLiked()
         return this._cardElement
     }
 }

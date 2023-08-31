@@ -33,7 +33,6 @@ const userInfo = new UserInfo(
   selectors.userNameSelector,
   selectors.userJobSelector
 );
-x;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
@@ -91,6 +90,16 @@ const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
     ownerId,
     likes,
     handleImageClick,
+    handleDeleteClick: (card) => {
+      api
+        .deleteCard(card._cardId)
+        .then(() => {
+          card._handleDeleteCard();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
     cardSelector: selectors.cardSelector,
   });
   return card.getView();
@@ -100,16 +109,12 @@ const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
 
-// const renderCard = (cardData) => {
-//   const card = new Card(cardData, handleImageClick, selectors.cardSelector);
-//   return card.getView();
-// };
+// const handleDeleteClick =
 
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
-  section.addItem(renderCard(cardData));
   api
     .createCard(cardData)
     .then((data) => {
