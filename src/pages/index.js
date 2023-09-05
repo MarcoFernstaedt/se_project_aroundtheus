@@ -2,6 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopuuWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
@@ -33,6 +34,22 @@ const userInfo = new UserInfo(
   selectors.userNameSelector,
   selectors.userJobSelector
 );
+
+const handleDeleteClick = (card) => {
+  
+  // if (confirmDeleteModal.confirm)
+  // api
+  //   .deleteCard(card._cardId)
+  //   .then(() => {
+  //     card._handleDeleteCard();
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   });
+};
+
+const confirmationModal = new PopupWithConfirmation(selectors.confirmationModalSelector)
+confirmationModal.setEventListeners()
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
@@ -91,14 +108,10 @@ const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
     likes,
     handleImageClick,
     handleDeleteClick: (card) => {
-      api
-        .deleteCard(card._cardId)
-        .then(() => {
-          card._handleDeleteCard();
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      confirmationModal.open()
+      if (!confirmationModal.confirmDelete) {
+        console.log("yes")
+      }
     },
     cardSelector: selectors.cardSelector,
   });
@@ -108,8 +121,6 @@ const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
 const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
-
-// const handleDeleteClick =
 
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();

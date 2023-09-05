@@ -63,6 +63,7 @@ const selectors = {
   cardFormSelector: "card-form",
   profileModalSelector: "#edit-profile-modal",
   profileFormSelector: "profile-form",
+  confirmationModalSelector: "#delete-modal",
 }
 
 export {
