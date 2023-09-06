@@ -41,7 +41,7 @@ const handleDeleteClick = (card) => {
     api
       .deleteCard(card._cardId)
       .then(() => {
-        card._handleDeleteCard();
+        card.deleteCard();
         confirmationModal.close()
       })
     .catch((err) => {
