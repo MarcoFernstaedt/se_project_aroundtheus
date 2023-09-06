@@ -36,16 +36,19 @@ const userInfo = new UserInfo(
 );
 
 const handleDeleteClick = (card) => {
-  
-  // if (confirmDeleteModal.confirm)
-  // api
-  //   .deleteCard(card._cardId)
-  //   .then(() => {
-  //     card._handleDeleteCard();
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   });
+  confirmationModal.setSubmitAction(() => {
+    confirmationModal.setButtonText(true, "Deleting...")
+    api
+      .deleteCard(card._cardId)
+      .then(() => {
+        card._handleDeleteCard();
+        confirmationModal.close()
+      })
+    .catch((err) => {
+      console.error(err);
+    });
+  })
+  confirmationModal.open()
 };
 
 const confirmationModal = new PopupWithConfirmation(selectors.confirmationModalSelector)
@@ -107,12 +110,7 @@ const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
     ownerId,
     likes,
     handleImageClick,
-    handleDeleteClick: (card) => {
-      confirmationModal.open()
-      if (!confirmationModal.confirmDelete) {
-        console.log("yes")
-      }
-    },
+    handleDeleteClick,
     cardSelector: selectors.cardSelector,
   });
   return card.getView();
