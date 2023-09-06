@@ -14,11 +14,10 @@ import {
   cardAddBtn,
   profileEditBtn,
   selectors,
+  apiInfo,
 } from "../utils/utils.js";
 import "../pages/index.css";
-
-const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3";
-const apiUrl = "https://around-api.en.tripleten-services.com/v1";
+const { apiToken, apiUrl } = apiInfo;
 let userId = null;
 let section = null;
 
@@ -39,7 +38,7 @@ const handleDeleteClick = (card) => {
   confirmationModal.setSubmitAction(() => {
     confirmationModal.setButtonText(true, "Deleting...")
     api
-      .deleteCard(card._cardId)
+      .deleteCard(card._id)
       .then(() => {
         card.deleteCard();
         confirmationModal.close()
@@ -66,6 +65,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       {
         items: cards,
         renderer: (cardData) => {
+          console.log(cardData)
           section.addItem(renderCard(cardData, userId));
         },
       },
@@ -102,6 +102,7 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
+  // console.log({ name, link, _id, ownerId, likes });
   const card = new Card({
     name,
     link,

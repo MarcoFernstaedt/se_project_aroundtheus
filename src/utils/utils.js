@@ -53,6 +53,11 @@ const config = {
   errorClass: "modal__error-visible",
 };
 
+const apiInfo = {
+  apiToken: "2aecf13b-f884-4550-afc8-5336476728b3",
+  apiUrl: "https://around-api.en.tripleten-services.com/v1",
+}
+
 const selectors = {
   userNameSelector: ".profile__title",
   userJobSelector: ".profile__description",
@@ -80,4 +85,5 @@ export {
   profileDescriptionText,
   profileTitleText,
   selectors,
+  apiInfo,
 };

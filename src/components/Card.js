@@ -1,9 +1,9 @@
-export default class Card {
+ export default class Card {
     constructor({ name, link, userId, _id, ownerId, likes, handleImageClick, handleDeleteClick, cardSelector }) {
         this._name = name;
         this._link = link;
         this._userId = userId;
-        this._cardId = _id;
+        this._id = _id;
         this._ownerId = ownerId;
         this._likes = likes;
         this._handleImageClick = handleImageClick;
@@ -30,8 +30,15 @@ export default class Card {
 
     }
 
+    isLiked() {
+        return console.log(this._likes)
+    }
+
     _toggleLikeButton() {
-        this._likeButton.classList.toggle('card__like-button_active');
+        if (this.isLiked()) {
+
+            this._likeButton.classList.toggle('card__like-button_active');
+        }
     }
 
     deleteCard() {
