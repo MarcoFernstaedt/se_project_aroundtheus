@@ -53,7 +53,7 @@ const handleDeleteClick = (card) => {
 const handleLikeClick = (card) => {
   if (card._isLiked) {
     api
-      .removeCardLike(card._id)
+      .removeCardLike(card._cardId)
       .then(() => {
         card._toggleLikeButton()
       })
@@ -62,7 +62,7 @@ const handleLikeClick = (card) => {
       })
   } else {
     api
-      .addCardLike(card._id)
+      .addCardLike(card._cardId)
       .then(() => {
         card._toggleLikeButton()
       })
