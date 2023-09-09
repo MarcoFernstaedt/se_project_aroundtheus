@@ -50,6 +50,28 @@ const handleDeleteClick = (card) => {
   confirmationModal.open()
 };
 
+const handleLikeClick = (card) => {
+  if (card._isLiked) {
+    api
+      .removeCardLike(card._id)
+      .then(() => {
+        card._toggleLikeButton()
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  } else {
+    api
+      .addCardLike(card._id)
+      .then(() => {
+        card._toggleLikeButton()
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+}
+
 const confirmationModal = new PopupWithConfirmation(selectors.confirmationModalSelector)
 confirmationModal.setEventListeners()
 
@@ -101,7 +123,7 @@ profileEditBtn.addEventListener("click", () => {
   formValidators["profile-form"].resetValidation();
 });
 
-const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
+const renderCard = ({ name, link, _id, ownerId, isLiked }, userId) => {
   // console.log({ name, link, _id, ownerId, likes });
   const card = new Card({
     name,
@@ -109,9 +131,10 @@ const renderCard = ({ name, link, _id, ownerId, likes }, userId) => {
     userId,
     _id,
     ownerId,
-    likes,
+    isLiked,
     handleImageClick,
     handleDeleteClick,
+    handleLikeClick,
     cardSelector: selectors.cardSelector,
   });
   return card.getView();
