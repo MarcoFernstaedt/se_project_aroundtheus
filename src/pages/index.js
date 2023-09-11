@@ -55,7 +55,7 @@ const handleLikeClick = (card) => {
     api
       .removeCardLike(card._cardId)
       .then(() => {
-        card._toggleLikeButton()
+        card.toggleLikeButton();
       })
       .catch((err) => {
         console.error(err);
@@ -64,7 +64,7 @@ const handleLikeClick = (card) => {
     api
       .addCardLike(card._cardId)
       .then(() => {
-        card._toggleLikeButton()
+        card.toggleLikeButton();
       })
       .catch((err) => {
         console.error(err);
@@ -87,7 +87,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       {
         items: cards,
         renderer: (cardData) => {
-          console.log(cardData)
           section.addItem(renderCard(cardData, userId));
         },
       },
