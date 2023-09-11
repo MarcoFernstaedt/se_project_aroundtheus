@@ -36,7 +36,6 @@ const userInfo = new UserInfo(
 
 const handleDeleteClick = (card) => {
   confirmationModal.setSubmitAction(() => {
-    confirmationModal.setButtonText(true, "Deleting...")
     api
       .deleteCard(card._id)
       .then(() => {
@@ -147,6 +146,7 @@ const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
 const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
+  cardModal.setButtonText(true);
   api
     .createCard(cardData)
     .then((data) => {
@@ -155,13 +155,15 @@ const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
     })
     .catch((err) => {
       console.error(err);
-    });
+    })
+    .finally(() => cardModal.setButtonText(false))
 });
 cardModal.setEventListeners();
 
 const profileModal = new PopupWithForm(
   selectors.profileModalSelector,
   (profileData) => {
+    profileModal.setButtonText(true);
     api
       .editUserInfo(profileData)
       .then((profileData) => {
@@ -170,7 +172,8 @@ const profileModal = new PopupWithForm(
       })
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(() => profileModal.setButtonText(false))
   }
 );
 profileModal.setEventListeners();

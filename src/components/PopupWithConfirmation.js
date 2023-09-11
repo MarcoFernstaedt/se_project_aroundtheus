@@ -4,8 +4,6 @@ export default class PopupWithConfirmation extends Popup {
     constructor(popupSelector) {
         super(popupSelector)
         this._form = this._popup.querySelector(".modal__form");
-        this._submitButton = this._popup.querySelector(".modal__button");
-        this._submitButtonText = this._submitButton.textContent;
     }
 
     open() {
@@ -16,14 +14,6 @@ export default class PopupWithConfirmation extends Popup {
     close() {
         this._form.reset();
         super.close()
-    }
-
-    setButtonText(submit, buttonText = "Loading...") {
-        if (submit) {
-            this._submitButton.textContent = buttonText;
-        } else {
-            this._submitButton.textContent = this._submitButtonText;
-        }
     }
 
     setSubmitAction(callback) {
