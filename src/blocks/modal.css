@@ -136,6 +136,16 @@
   cursor: pointer;
 }
 
+.modal__button_disabled:hover { 
+  opacity: 1;
+  cursor: default;
+}
+
+.modal__button:hover:not(:disabled) {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 .modal__container-preview {
   position: relative;
   height: 100%;
