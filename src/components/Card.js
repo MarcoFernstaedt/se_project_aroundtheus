@@ -21,12 +21,6 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
     this._cardSelector = cardSelector;
-
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.firstElementChild.cloneNode(true);
-    this._cardImage = this._cardElement.querySelector(".card__image");
-    this._likeButton = this._cardElement.querySelector(".card__like-button");
   }
 
   _setEventListeners() {
@@ -67,13 +61,16 @@ export default class Card {
   }
 
   getView() {
+    this._cardElement = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
+    this._cardImage = this._cardElement.querySelector(".card__image");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+
     this._setEventListeners();
     this.renderLikes();
 
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
-    // this._isLiked()
     return this._cardElement;
   }
 }
