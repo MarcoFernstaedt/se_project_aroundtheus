@@ -25,6 +25,9 @@ const initialCards = [
   },
 ];
 
+const avatarButton = document.querySelector('.profile__avatar-button');
+const avatarImage = document.querySelector('.profile__image');
+
 const profileTitleText = document.querySelector(".profile__title");
 const profileDescriptionText = document.querySelector(".profile__description");
 const profileEditBtn = document.querySelector(".profile__edit-button");
@@ -59,6 +62,8 @@ const apiInfo = {
 }
 
 const selectors = {
+  avatarModalSelector: "#edit-avatar-modal",
+  userAvatarSelector: ".profile__image",
   userNameSelector: ".profile__title",
   userJobSelector: ".profile__description",
   imageModalSelector: "#preview-card-modal",
@@ -72,7 +77,8 @@ const selectors = {
 }
 
 export {
-  initialCards,
+  avatarButton,
+  avatarImage,
   config,
   cardImageInput,
   cardTitleInput,

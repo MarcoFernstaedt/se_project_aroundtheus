@@ -7,7 +7,8 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import {
-  initialCards,
+  avatarButton,
+  avatarImage,
   config,
   editProfileModalDescriptionInput,
   editProfileModalTitleInput,
@@ -31,7 +32,8 @@ const api = new Api({
 
 const userInfo = new UserInfo(
   selectors.userNameSelector,
-  selectors.userJobSelector
+  selectors.userJobSelector,
+  selectors.userAvatarSelector,
 );
 
 const handleDeleteClick = (card) => {
@@ -76,10 +78,10 @@ confirmationModal.setEventListeners()
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
-    userId = data._id;
     userInfo.setUserInfo({
       name: data.name,
       job: data.about,
+      avatar: data.avatar,
     });
 
     section = new Section(
@@ -142,6 +144,22 @@ const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
 
+const avatarModal = new PopupWithForm(selectors.avatarModalSelector, (avatarData) => {
+  avatarModal.setButtonText(true);
+  api
+    .editProfilePhoto(avatarData)
+    .then((data) => {
+      console.log(data)
+      userInfo.setUserInfo(data)
+      avatarModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => avatarModal.setButtonText());
+});
+avatarModal.setEventListeners();
+
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
 imageModal.setEventListeners();
 
@@ -177,6 +195,10 @@ const profileModal = new PopupWithForm(
   }
 );
 profileModal.setEventListeners();
+
+avatarButton.addEventListener('click', () => {
+  avatarModal.open()
+})
 
 cardAddBtn.addEventListener("click", () => {
   cardModal.open();

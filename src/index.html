@@ -24,14 +24,17 @@
             <button class="profile__avatar-button" id="avatar-button" type="button"></button>
             <img
               class="profile__image"
-              src="<%=require("./images/jacques-cousteau.png")%>"
+              src=""
               alt="Avatar"
             />
+            <!-- src="<%=require("./images/jacques-cousteau.png")%>" -->
           </div>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
+            <!-- <h1 class="profile__title">Jacques Cousteau</h1> -->
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
+            <!-- <p class="profile__description">Explorer</p> -->
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -42,6 +45,26 @@
       <footer class="footer page__section">
         <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
       </footer>
+    </div>
+
+    <!-- EDIT AVATAR IMAGE -->
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container modal__container_avatar">
+        <button class="modal__close-button" type="button" ></button>
+        <form class="modal__form" id="avatar-form" novalidate>
+          <p class="modal__heading">Change profile picture</p>
+          <input
+            name="avatar"
+            placeholder="Image Link"
+            id="avatar-link"
+            type="url"
+            class="modal__form-input modal__form-input_type_avatar"
+            required
+          />
+          <span class="modal__error" id="avatar-link-error"></span>
+          <button class="modal__button" type="submit" >Save</button>
+        </form>
+      </div>
     </div>
 
     <!-- EDIT PROFILE MODAL -->
@@ -130,8 +153,9 @@
       </div>
     </div>
 
+    <!-- CONFIRM DELETE MODAL -->
     <div class="modal" id="delete-modal">
-      <div class="modal__container">
+      <div class="modal__container modal__container_confirm">
         <button class="modal__close"></button>
         <form class="modal__form">
           <p class="modal__heading">Are you sure?</p>

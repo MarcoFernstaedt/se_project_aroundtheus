@@ -29,6 +29,14 @@
   background-color: #fff;
 }
 
+.modal__container_confirm {
+  max-height: 181px;
+}
+
+.modal__container_avatar {
+  max-height: 272px;
+}
+
 .modal__close {
   background-image: url("../images/close-button.svg");
   position: absolute;
