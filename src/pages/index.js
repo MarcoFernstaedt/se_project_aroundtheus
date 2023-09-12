@@ -86,8 +86,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({
       name: data.name,
       job: data.about,
-      avatar: data.avatar,
     });
+
+    userInfo.setAvatar(data.avatar);
 
     section = new Section(
       {
@@ -129,7 +130,6 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 const renderCard = ({ name, link, _id, ownerId, isLiked }, userId) => {
-  // console.log({ name, link, _id, ownerId, likes });
   const card = new Card({
     name,
     link,
@@ -156,8 +156,7 @@ const avatarModal = new PopupWithForm(
     api
       .editProfilePhoto(avatarData)
       .then((data) => {
-        console.log(data);
-        userInfo.setUserInfo(data);
+        userInfo.setAvatar(data.avatar);
         avatarModal.close();
       })
       .catch((err) => {
