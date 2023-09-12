@@ -54,12 +54,11 @@ const handleDeleteClick = (card) => {
 };
 
 const handleLikeClick = (card) => {
-  console.log(card._isLiked);
   if (card._isLiked) {
     api
       .removeCardLike(card._cardId)
       .then(() => {
-        card.setLikes(card._isLiked);
+        card.setLikes(false);
       })
       .catch((err) => {
         console.error(err);
@@ -68,7 +67,7 @@ const handleLikeClick = (card) => {
     api
       .addCardLike(card._cardId)
       .then(() => {
-        card.setLikes(card._isLiked);
+        card.setLikes(true);
       })
       .catch((err) => {
         console.error(err);
