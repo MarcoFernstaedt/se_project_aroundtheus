@@ -198,6 +198,7 @@ profileModal.setEventListeners();
 
 avatarButton.addEventListener('click', () => {
   avatarModal.open()
+  formValidators[selectors.avatarFormSelector].resetValidation()
 })
 
 cardAddBtn.addEventListener("click", () => {

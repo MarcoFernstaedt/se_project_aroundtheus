@@ -63,6 +63,7 @@ const apiInfo = {
 
 const selectors = {
   avatarModalSelector: "#edit-avatar-modal",
+  avatarFormSelector: "avatar-form",
   userAvatarSelector: ".profile__image",
   userNameSelector: ".profile__title",
   userJobSelector: ".profile__description",
