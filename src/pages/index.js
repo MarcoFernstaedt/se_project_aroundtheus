@@ -16,6 +16,8 @@ import {
   profileEditBtn,
   selectors,
   apiInfo,
+  profileTitleText,
+  profileDescriptionText,
 } from "../utils/utils.js";
 import "../pages/index.css";
 const { apiToken, apiUrl } = apiInfo;
@@ -191,8 +193,14 @@ const profileModal = new PopupWithForm(
     api
       .editUserInfo(profileData)
       .then((profileData) => {
-        userInfo.setUserInfo(profileData.name, profileData.job);
+        userInfo.setUserInfo({
+          name: profileData.name,
+          job: profileData.about,
+        });
         profileModal.close();
+      })
+      .then(() => {
+        console.log(userInfo.getUserInfo())
       })
       .catch((err) => {
         console.error(err);
