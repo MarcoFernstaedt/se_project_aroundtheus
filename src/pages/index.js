@@ -33,26 +33,28 @@ const api = new Api({
 const userInfo = new UserInfo(
   selectors.userNameSelector,
   selectors.userJobSelector,
-  selectors.userAvatarSelector,
+  selectors.userAvatarSelector
 );
 
 const handleDeleteClick = (card) => {
   confirmationModal.setSubmitAction(() => {
+    confirmationModal.setButtonText(true);
     api
       .deleteCard(card._id)
       .then(() => {
         card.deleteCard();
-        confirmationModal.close()
+        confirmationModal.close();
       })
-    .catch((err) => {
-      console.error(err);
-    });
-  })
-  confirmationModal.open()
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => confirmationModal.setButtonText(false));
+  });
+  confirmationModal.open();
 };
 
 const handleLikeClick = (card) => {
-  console.log(card._isLiked)
+  console.log(card._isLiked);
   if (card._isLiked) {
     api
       .removeCardLike(card._cardId)
@@ -61,7 +63,7 @@ const handleLikeClick = (card) => {
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   } else {
     api
       .addCardLike(card._cardId)
@@ -70,12 +72,14 @@ const handleLikeClick = (card) => {
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
-}
+};
 
-const confirmationModal = new PopupWithConfirmation(selectors.confirmationModalSelector)
-confirmationModal.setEventListeners()
+const confirmationModal = new PopupWithConfirmation(
+  selectors.confirmationModalSelector
+);
+confirmationModal.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
@@ -145,20 +149,23 @@ const handleImageClick = ({ name, link }) => {
   imageModal.open({ name, link });
 };
 
-const avatarModal = new PopupWithForm(selectors.avatarModalSelector, (avatarData) => {
-  avatarModal.setButtonText(true);
-  api
-    .editProfilePhoto(avatarData)
-    .then((data) => {
-      console.log(data)
-      userInfo.setUserInfo(data)
-      avatarModal.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => avatarModal.setButtonText());
-});
+const avatarModal = new PopupWithForm(
+  selectors.avatarModalSelector,
+  (avatarData) => {
+    avatarModal.setButtonText(true);
+    api
+      .editProfilePhoto(avatarData)
+      .then((data) => {
+        console.log(data);
+        userInfo.setUserInfo(data);
+        avatarModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => avatarModal.setButtonText());
+  }
+);
 avatarModal.setEventListeners();
 
 const imageModal = new PopuuWithImage(selectors.imageModalSelector);
@@ -175,7 +182,7 @@ const cardModal = new PopupWithForm(selectors.cardModalSelector, (cardData) => {
     .catch((err) => {
       console.error(err);
     })
-    .finally(() => cardModal.setButtonText(false))
+    .finally(() => cardModal.setButtonText(false));
 });
 cardModal.setEventListeners();
 
@@ -192,15 +199,15 @@ const profileModal = new PopupWithForm(
       .catch((err) => {
         console.error(err);
       })
-      .finally(() => profileModal.setButtonText(false))
+      .finally(() => profileModal.setButtonText(false));
   }
 );
 profileModal.setEventListeners();
 
-avatarButton.addEventListener('click', () => {
-  avatarModal.open()
-  formValidators[selectors.avatarFormSelector].resetValidation()
-})
+avatarButton.addEventListener("click", () => {
+  avatarModal.open();
+  formValidators[selectors.avatarFormSelector].resetValidation();
+});
 
 cardAddBtn.addEventListener("click", () => {
   cardModal.open();
