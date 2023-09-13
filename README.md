@@ -24,3 +24,5 @@ This project is a website containing a profile for Jacques Cousteau and differen
 **Github**
 
 - [Link to live site](https://marcofernstaedt.github.io/se_project_aroundtheus/)
+
+- [Link to video demo of the project](https://www.loom.com/share/Around-the-US-13-September-2023-4b3ddd1d16144bccb5c2898a6dc6d56a?sid=3395e216-d854-4127-b62a-2cbd50b4e8b3)
