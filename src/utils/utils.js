@@ -61,6 +61,9 @@ const apiInfo = {
   apiUrl: "https://around-api.en.tripleten-services.com/v1",
 }
 
+const apiToken = "2aecf13b-f884-4550-afc8-5336476728b3"
+const apiUrl = "https://around-api.en.tripleten-services.com/v1"
+
 const selectors = {
   avatarModalSelector: "#edit-avatar-modal",
   avatarFormSelector: "avatar-form",
@@ -93,4 +96,6 @@ export {
   profileTitleText,
   selectors,
   apiInfo,
+  apiToken,
+  apiUrl,
 };

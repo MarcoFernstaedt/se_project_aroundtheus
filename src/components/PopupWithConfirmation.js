@@ -4,6 +4,8 @@ export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._form = this._popup.querySelector(".modal__form");
+    this._submitButton = this._popup.querySelector('.modal__button');
+    this._submitButtonText = this._submitButton.textContent;
   }
 
   open() {
@@ -17,6 +19,7 @@ export default class PopupWithConfirmation extends Popup {
 
   setButtonText(submit, buttonText = "Saving...") {
     if (submit) {
+      console.log(this._submitButton)
       this._submitButton.textContent = buttonText;
     } else {
       this._submitButton.textContent = this._submitButtonText;

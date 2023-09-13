@@ -42,7 +42,7 @@ const handleDeleteClick = (card) => {
   confirmationModal.setSubmitAction(() => {
     confirmationModal.setButtonText(true);
     api
-      .deleteCard(card._id)
+      .deleteCard(card._cardId)
       .then(() => {
         card.deleteCard();
         confirmationModal.close();
