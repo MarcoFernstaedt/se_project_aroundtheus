@@ -25,6 +25,9 @@ const initialCards = [
   },
 ];
 
+const avatarButton = document.querySelector('.profile__avatar-button');
+const avatarImage = document.querySelector('.profile__image');
+
 const profileTitleText = document.querySelector(".profile__title");
 const profileDescriptionText = document.querySelector(".profile__description");
 const profileEditBtn = document.querySelector(".profile__edit-button");
@@ -53,7 +56,15 @@ const config = {
   errorClass: "modal__error-visible",
 };
 
+const apiInfo = {
+  apiToken: "2aecf13b-f884-4550-afc8-5336476728b3",
+  apiUrl: "https://around-api.en.tripleten-services.com/v1",
+}
+
 const selectors = {
+  avatarModalSelector: "#edit-avatar-modal",
+  avatarFormSelector: "avatar-form",
+  userAvatarSelector: ".profile__image",
   userNameSelector: ".profile__title",
   userJobSelector: ".profile__description",
   imageModalSelector: "#preview-card-modal",
@@ -63,10 +74,12 @@ const selectors = {
   cardFormSelector: "card-form",
   profileModalSelector: "#edit-profile-modal",
   profileFormSelector: "profile-form",
+  confirmationModalSelector: "#delete-modal",
 }
 
 export {
-  initialCards,
+  avatarButton,
+  avatarImage,
   config,
   cardImageInput,
   cardTitleInput,
@@ -79,4 +92,5 @@ export {
   profileDescriptionText,
   profileTitleText,
   selectors,
+  apiInfo,
 };

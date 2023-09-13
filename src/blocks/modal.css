@@ -29,6 +29,14 @@
   background-color: #fff;
 }
 
+.modal__container_confirm {
+  max-height: 181px;
+}
+
+.modal__container_avatar {
+  max-height: 272px;
+}
+
 .modal__close {
   background-image: url("../images/close-button.svg");
   position: absolute;
@@ -125,6 +133,16 @@
 .modal__button:hover {
   opacity: 0.6;
   transition: 0.5s ease-in;
+  cursor: pointer;
+}
+
+.modal__button_disabled:hover { 
+  opacity: 1;
+  cursor: default;
+}
+
+.modal__button:hover:not(:disabled) {
+  opacity: 0.8;
   cursor: pointer;
 }
 
