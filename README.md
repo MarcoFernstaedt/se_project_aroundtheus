@@ -6,6 +6,7 @@
 - Technologies Used
 - Figma
 - GitHub
+- Loom
 
 **Description and Functionality**
 
